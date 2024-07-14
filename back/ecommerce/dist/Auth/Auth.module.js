@@ -6,19 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppModule = void 0;
+exports.AuthsModule = void 0;
 const common_1 = require("@nestjs/common");
-const Users_module_1 = require("./Users/Users.module");
-const Auth_module_1 = require("./Auth/Auth.module");
-const Products_module_1 = require("./Products/Products.module");
-let AppModule = class AppModule {
+const Auth_service_1 = require("./Auth.service");
+const Auth_controller_1 = require("./Auth.controller");
+const logger_middleware_1 = require("../Middlewares/logger.middleware");
+let AuthsModule = class AuthsModule {
+    configure(consumer) {
+        consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('auths');
+    }
 };
-exports.AppModule = AppModule;
-exports.AppModule = AppModule = __decorate([
+exports.AuthsModule = AuthsModule;
+exports.AuthsModule = AuthsModule = __decorate([
     (0, common_1.Module)({
-        imports: [Auth_module_1.AuthsModule, Products_module_1.ProductsModule, Users_module_1.UsersModule],
-        controllers: [],
-        providers: [],
+        providers: [Auth_service_1.AuthsService],
+        controllers: [Auth_controller_1.AuthsController],
     })
-], AppModule);
-//# sourceMappingURL=app.module.js.map
+], AuthsModule);
+//# sourceMappingURL=Auth.module.js.map

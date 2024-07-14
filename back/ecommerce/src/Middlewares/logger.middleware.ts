@@ -9,3 +9,8 @@ export class LoggerMiddleware implements NestMiddleware {
         next();
     }
 }
+
+export function loogerGlobal(req: Request, res: Response, next: NextFunction) {
+    console.log(`Estas Ejecutando Un Metodo ${req.method} en la ruta ${req.url}`);
+    next();
+}

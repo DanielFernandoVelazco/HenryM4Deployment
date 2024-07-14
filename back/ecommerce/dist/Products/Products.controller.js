@@ -9,26 +9,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
+exports.ProductsController = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
-let AppController = class AppController {
-    constructor(appService) {
-        this.appService = appService;
+const Products_service_1 = require("./Products.service");
+let ProductsController = class ProductsController {
+    constructor(productsService) {
+        this.productsService = productsService;
     }
-    getHello() {
-        return this.appService.getHello();
+    getProducts() {
+        return this.productsService.getProducts();
     }
 };
-exports.AppController = AppController;
+exports.ProductsController = ProductsController;
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-exports.AppController = AppController = __decorate([
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [app_service_1.AppService])
-], AppController);
-//# sourceMappingURL=app.controller.js.map
+    __metadata("design:returntype", void 0)
+], ProductsController.prototype, "getProducts", null);
+exports.ProductsController = ProductsController = __decorate([
+    (0, common_1.Controller)('products'),
+    __metadata("design:paramtypes", [Products_service_1.ProductsService])
+], ProductsController);
+//# sourceMappingURL=Products.controller.js.map
