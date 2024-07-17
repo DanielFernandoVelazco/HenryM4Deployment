@@ -20,7 +20,7 @@ exports.LoggerMiddleware = LoggerMiddleware = __decorate([
     (0, common_1.Injectable)()
 ], LoggerMiddleware);
 function loogerGlobal(req, res, next) {
-    console.log(`Estas Ejecutando Un Metodo ${req.method} en la ruta ${req.url}`);
+    console.log(`Estas Ejecutando Un Metodo ${req.method} en la ruta ${req.url}. La hora de ${new Date().getHours()} : ${new Date().getMinutes()}`);
     next();
 }
 //# sourceMappingURL=logger.middleware.js.map

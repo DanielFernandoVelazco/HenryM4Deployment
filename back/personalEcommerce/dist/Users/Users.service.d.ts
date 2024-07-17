@@ -1,3 +1,6 @@
+import { UsersRepository } from "./Users.repository";
 export declare class UsersService {
-    getUsers(): string;
+    private usersRepository;
+    constructor(usersRepository: UsersRepository);
+    getUsers(): Promise<import("../VariableTypes/usersObject").default[]>;
 }

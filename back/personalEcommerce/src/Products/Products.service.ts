@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
+import { ProductsRepository } from "./Products.repository";
 
 @Injectable()
 export class ProductsService {
+    constructor(private productsRepository: ProductsRepository) { }
     getProducts() {
-        return 'Get All Products';
+        return this.productsRepository.getProducts();
     }
 }

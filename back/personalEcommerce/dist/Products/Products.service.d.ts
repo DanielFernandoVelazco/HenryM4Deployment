@@ -1,3 +1,6 @@
+import { ProductsRepository } from "./Products.repository";
 export declare class ProductsService {
-    getProducts(): string;
+    private productsRepository;
+    constructor(productsRepository: ProductsRepository);
+    getProducts(): Promise<import("../VariableTypes/productsObject").default[]>;
 }

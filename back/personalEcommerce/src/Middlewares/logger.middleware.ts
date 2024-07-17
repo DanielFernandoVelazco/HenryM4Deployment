@@ -11,6 +11,6 @@ export class LoggerMiddleware implements NestMiddleware {
 }
 
 export function loogerGlobal(req: Request, res: Response, next: NextFunction) {
-    console.log(`Estas Ejecutando Un Metodo ${req.method} en la ruta ${req.url}`);
+    console.log(`Estas Ejecutando Un Metodo ${req.method} en la ruta ${req.url}. La hora de ${new Date().getHours()} : ${new Date().getMinutes()}`);
     next();
 }

@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
+import { UsersRepository } from "./Users.repository";
 
 @Injectable()
 export class UsersService {
+    constructor(private usersRepository: UsersRepository) { }
     getUsers() {
-        return 'Get All Users';
+        return this.usersRepository.getUsers();
     }
 }

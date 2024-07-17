@@ -10,16 +10,15 @@ exports.ProductsModule = void 0;
 const common_1 = require("@nestjs/common");
 const Products_controller_1 = require("./Products.controller");
 const Products_service_1 = require("./Products.service");
-const logger_middleware_1 = require("../Middlewares/logger.middleware");
+const Products_repository_1 = require("./Products.repository");
 let ProductsModule = class ProductsModule {
     configure(consumer) {
-        consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('products');
     }
 };
 exports.ProductsModule = ProductsModule;
 exports.ProductsModule = ProductsModule = __decorate([
     (0, common_1.Module)({
-        providers: [Products_service_1.ProductsService],
+        providers: [Products_service_1.ProductsService, Products_repository_1.ProductsRepository],
         controllers: [Products_controller_1.ProductsController],
     })
 ], ProductsModule);
