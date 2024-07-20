@@ -5,7 +5,7 @@ export declare class ProductsController {
     private readonly productsService;
     constructor(productsService: ProductsService);
     create(createProductDto: CreateProductDto): string;
-    findAll(): string;
+    findAll(): import("../entities/product.entity").default[];
     findOne(id: string): string;
     update(id: string, updateProductDto: UpdateProductDto): string;
     remove(id: string): string;
