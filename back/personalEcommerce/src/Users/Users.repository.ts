@@ -4,6 +4,7 @@ import typeUserObject from "../VariableTypes/usersObject";
 
 @Injectable()
 export class UsersRepository {
+
     private users: typeUserObject[] = [
         {
             id: 1,
@@ -38,5 +39,15 @@ export class UsersRepository {
     ]
     async getUsers() {
         return this.users
+    }
+
+    async getUserById(id: number) {
+        return this.users.find(user => user.id === id)
+    }
+
+    async createUser(user: Omit<typeUserObject, "id">) {
+        const id = this.users.length + 1;
+        this.users = [... this.users, { id, ...user }];
+        return { id, ...user };
     }
 }

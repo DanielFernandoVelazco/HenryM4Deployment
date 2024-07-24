@@ -19,6 +19,12 @@ let UsersService = class UsersService {
     getUsers() {
         return this.usersRepository.getUsers();
     }
+    getUserById(id) {
+        return this.usersRepository.getUserById(id);
+    }
+    createUser(user) {
+        return this.usersRepository.createUser(user);
+    }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([

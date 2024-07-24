@@ -46,6 +46,14 @@ let UsersRepository = class UsersRepository {
     async getUsers() {
         return this.users;
     }
+    async getUserById(id) {
+        return this.users.find(user => user.id === id);
+    }
+    async createUser(user) {
+        const id = this.users.length + 1;
+        this.users = [...this.users, { id, ...user }];
+        return { id, ...user };
+    }
 };
 exports.UsersRepository = UsersRepository;
 exports.UsersRepository = UsersRepository = __decorate([
