@@ -1,11 +1,14 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
-import UserEntity from "src/entities/users.entity";
+//import UserEntity from "src/entities/users.entity";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateProductDto } from "src/products/dto/update-product.dto";
 
 
 @Injectable()
 export class UsersRepository {
-    private users: UserEntity[] = [
+
+    private users = [
         {
             id: 1,
             email: 'a@a.com',
@@ -40,5 +43,40 @@ export class UsersRepository {
 
     finAll() {
         return this.users
+    }
+
+    create(createUser: CreateUserDto) {
+        const newUser = {
+            id: this.users.length + 1,
+            country: createUser.country || 'Default Country',
+            city: createUser.city || 'Default City',
+            ...createUser
+        }
+        this.users.push(newUser)
+        return newUser.id
+    }
+
+    findOneByEmail(email: string) {
+        return this.users.find(user => user.email === email)
+    }
+
+    findOne(id: number) {
+        return this.users.find(user => user.id === id)
+    }
+
+
+    remove(id: number) {
+        this.users = this.users.filter(user => user.id !== id)
+        return id
+    }
+
+    update(id: number, updateUserDto: UpdateProductDto) {
+        const user = this.findOne(id)
+        const updateUser = {
+            ...user,
+            ...updateUserDto,
+        }
+        this.users = this.users.map(user => user.id === id ? updateUser : user)
+        return updateUser
     }
 }

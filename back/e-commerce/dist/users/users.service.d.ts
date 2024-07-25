@@ -4,9 +4,46 @@ import { UsersRepository } from './users.repository';
 export declare class UsersService {
     private readonly usersRepository;
     constructor(usersRepository: UsersRepository);
-    create(createUserDto: CreateUserDto): string;
-    findAll(): import("../entities/users.entity").default[];
-    findOne(id: number): string;
-    update(id: number, updateUserDto: UpdateUserDto): string;
-    remove(id: number): string;
+    create(createUserDto: CreateUserDto): number;
+    findAll(): {
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    }[];
+    findOne(id: number): {
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    };
+    update(id: number, updateUserDto: UpdateUserDto): {
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    };
+    remove(id: number): number;
+    findOneByEmail(email: string): {
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    };
 }

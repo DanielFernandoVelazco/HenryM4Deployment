@@ -1,9 +1,7 @@
-import { CreateAuthDto } from './dto/create-auth.dto';
-import { UpdateAuthDto } from './dto/update-auth.dto';
+import { UsersService } from 'src/users/users.service';
+import { SignInAuthDto } from './dto/signin-dto';
 export declare class AuthService {
-    create(createAuthDto: CreateAuthDto): string;
-    findAll(): string;
-    findOne(id: number): string;
-    update(id: number, updateAuthDto: UpdateAuthDto): string;
-    remove(id: number): string;
+    private readonly userService;
+    constructor(userService: UsersService);
+    signIn(Credentials: SignInAuthDto): "You are logged in" | "Email or password are incorrect, please try again";
 }

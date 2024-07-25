@@ -46,6 +46,35 @@ let UsersRepository = class UsersRepository {
     finAll() {
         return this.users;
     }
+    create(createUser) {
+        const newUser = {
+            id: this.users.length + 1,
+            country: createUser.country || 'Default Country',
+            city: createUser.city || 'Default City',
+            ...createUser
+        };
+        this.users.push(newUser);
+        return newUser.id;
+    }
+    findOneByEmail(email) {
+        return this.users.find(user => user.email === email);
+    }
+    findOne(id) {
+        return this.users.find(user => user.id === id);
+    }
+    remove(id) {
+        this.users = this.users.filter(user => user.id !== id);
+        return id;
+    }
+    update(id, updateUserDto) {
+        const user = this.findOne(id);
+        const updateUser = {
+            ...user,
+            ...updateUserDto,
+        };
+        this.users = this.users.map(user => user.id === id ? updateUser : user);
+        return updateUser;
+    }
 };
 exports.UsersRepository = UsersRepository;
 exports.UsersRepository = UsersRepository = __decorate([

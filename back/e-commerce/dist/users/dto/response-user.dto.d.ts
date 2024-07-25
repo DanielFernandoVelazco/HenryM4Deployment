@@ -1,9 +1,9 @@
-export declare class CreateUserDto {
+export declare class UserResponseDto {
     name: string;
     email: string;
-    password: string;
     address: string;
     phone: string;
     country?: string;
     city?: string;
+    constructor(partial: Partial<UserResponseDto>);
 }
