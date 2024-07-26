@@ -4,6 +4,7 @@ import typeProductObject from "../VariableTypes/productsObject";
 
 @Injectable()
 export class ProductsRepository {
+
     private products: typeProductObject[] = [
         {
             id: 1,
@@ -41,5 +42,15 @@ export class ProductsRepository {
 
     async getProducts() {
         return this.products
+    }
+
+    async getProductsById(id: number) {
+        return this.products.find(product => product.id === id)
+    }
+
+    async createProduct(product: Omit<typeProductObject, "id">) {
+        const id = this.products.length + 1;
+        this.products = [... this.products, { id, ...product }];
+        return { id, ...product };
     }
 }

@@ -1,12 +1,27 @@
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { ProductResponseDto } from './dto/response-user.dto';
 export declare class ProductsController {
     private readonly productsService;
     constructor(productsService: ProductsService);
-    create(createProductDto: CreateProductDto): string;
-    findAll(): import("../entities/product.entity").default[];
-    findOne(id: string): string;
-    update(id: string, updateProductDto: UpdateProductDto): string;
-    remove(id: string): string;
+    findAll(page?: number, limite?: number): {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imgUrl: string;
+    }[];
+    create(createProductDto: CreateProductDto): number;
+    findOne(id: string): ProductResponseDto;
+    update(id: string, updateProductDto: UpdateProductDto): {
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imgUrl: string;
+        id: number;
+    };
+    remove(id: string): number;
 }

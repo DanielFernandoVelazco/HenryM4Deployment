@@ -4,9 +4,38 @@ import { ProductsRepository } from './products.repository';
 export declare class ProductsService {
     private readonly productsRepository;
     constructor(productsRepository: ProductsRepository);
-    create(createProductDto: CreateProductDto): string;
-    findAll(): import("../entities/product.entity").default[];
-    findOne(id: number): string;
-    update(id: number, updateProductDto: UpdateProductDto): string;
-    remove(id: number): string;
+    create(createProductDto: CreateProductDto): number;
+    findAll(): {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imgUrl: string;
+    }[];
+    findOne(id: number): {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imgUrl: string;
+    };
+    update(id: number, updateProductDto: UpdateProductDto): {
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imgUrl: string;
+        id: number;
+    };
+    remove(id: number): number;
+    findOneByName(name: string): {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imgUrl: string;
+    };
 }

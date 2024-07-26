@@ -1,10 +1,11 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
-import ProductEntity from "src/entities/product.entity";
+import { CreateProductDto } from "./dto/create-product.dto";
+import { UpdateProductDto } from "./dto/update-product.dto";
 
 @Injectable()
 export class ProductsRepository {
-    private products: ProductEntity[] = [
+    private products = [
         {
             id: 1,
             name: 'Product 1',
@@ -34,4 +35,40 @@ export class ProductsRepository {
     findAll() {
         return this.products
     }
+
+    create(createProduct: CreateProductDto) {
+        const newUser = {
+            id: this.products.length + 1,
+            ...createProduct
+        }
+        this.products.push(newUser)
+        return newUser.id
+    }
+
+    findOneByName(name: string) {
+        return this.products.find(product => product.name === name)
+    }
+
+    findOne(id: number) {
+        return this.products.find(product => product.id === id)
+    }
+
+    remove(id: number) {
+        this.products = this.products.filter(product => product.id !== id)
+        return id
+    }
+
+    update(id: number, updateProductDto: UpdateProductDto) {
+        const product = this.findOne(id)
+        const updateProduct = {
+            ...product,
+            ...updateProductDto,
+        }
+        this.products = this.products.map(product => product.id === id ? updateProduct : product)
+        return updateProduct
+    }
+
+
+
+
 }

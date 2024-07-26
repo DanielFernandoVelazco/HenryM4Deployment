@@ -48,6 +48,14 @@ let ProductsRepository = class ProductsRepository {
     async getProducts() {
         return this.products;
     }
+    async getProductsById(id) {
+        return this.products.find(product => product.id === id);
+    }
+    async createProduct(product) {
+        const id = this.products.length + 1;
+        this.products = [...this.products, { id, ...product }];
+        return { id, ...product };
+    }
 };
 exports.ProductsRepository = ProductsRepository;
 exports.ProductsRepository = ProductsRepository = __decorate([

@@ -40,6 +40,33 @@ let ProductsRepository = class ProductsRepository {
     findAll() {
         return this.products;
     }
+    create(createProduct) {
+        const newUser = {
+            id: this.products.length + 1,
+            ...createProduct
+        };
+        this.products.push(newUser);
+        return newUser.id;
+    }
+    findOneByName(name) {
+        return this.products.find(product => product.name === name);
+    }
+    findOne(id) {
+        return this.products.find(product => product.id === id);
+    }
+    remove(id) {
+        this.products = this.products.filter(product => product.id !== id);
+        return id;
+    }
+    update(id, updateProductDto) {
+        const product = this.findOne(id);
+        const updateProduct = {
+            ...product,
+            ...updateProductDto,
+        };
+        this.products = this.products.map(product => product.id === id ? updateProduct : product);
+        return updateProduct;
+    }
 };
 exports.ProductsRepository = ProductsRepository;
 exports.ProductsRepository = ProductsRepository = __decorate([

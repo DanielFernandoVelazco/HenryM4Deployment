@@ -18,14 +18,14 @@ export declare class UsersController {
     create(createUserDto: CreateUserDto): number;
     findOne(id: string): UserResponseDto;
     update(id: string, updateUserDto: UpdateUserDto): {
-        id: number;
-        email: string;
         name: string;
+        email: string;
         password: string;
         address: string;
         phone: string;
         country: string;
         city: string;
+        id: number;
     };
     remove(id: string): number;
 }

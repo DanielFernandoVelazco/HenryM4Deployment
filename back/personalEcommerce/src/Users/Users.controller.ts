@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Body, Controller, Get, Param, Post, Req } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Req } from "@nestjs/common";
 import { UsersService } from "./Users.service";
 import typeUserObject from "src/VariableTypes/usersObject";
 
@@ -20,5 +20,15 @@ export class UsersController {
     @Post()
     createUser(@Body() user: typeUserObject, @Req() req: any) {
         return this.usersService.createUser(user);
+    }
+
+    @Put()
+    updateUser() {
+        return 'Este es el metodo update';
+    }
+
+    @Delete()
+    deleteUser() {
+        return 'Este es el metodo delete';
     }
 }

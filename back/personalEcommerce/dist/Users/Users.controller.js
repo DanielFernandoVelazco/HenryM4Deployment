@@ -28,6 +28,12 @@ let UsersController = class UsersController {
     createUser(user, req) {
         return this.usersService.createUser(user);
     }
+    updateUser() {
+        return 'Este es el metodo update';
+    }
+    deleteUser() {
+        return 'Este es el metodo delete';
+    }
 };
 exports.UsersController = UsersController;
 __decorate([
@@ -51,6 +57,18 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], UsersController.prototype, "createUser", null);
+__decorate([
+    (0, common_1.Put)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "updateUser", null);
+__decorate([
+    (0, common_1.Delete)(),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", void 0)
+], UsersController.prototype, "deleteUser", null);
 exports.UsersController = UsersController = __decorate([
     (0, common_1.Controller)('users'),
     __metadata("design:paramtypes", [Users_service_1.UsersService])

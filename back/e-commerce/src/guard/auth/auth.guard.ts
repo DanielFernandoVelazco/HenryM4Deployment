@@ -15,15 +15,15 @@ export class AuthGuard implements CanActivate {
     if (!authHeader) {
       throw new HttpException('Not authorized', HttpStatus.UNAUTHORIZED);
     }
-    const authFormat = authHeader.split(' ');
-    console.log(authHeader);
-    console.log(authFormat);
+    //const authFormat = authHeader.split(' ');
+    //console.log(authHeader);
+    //console.log(authFormat);
 
-    const credentialsBase64 = authFormat[1];
-    const decodedCredentials = Buffer.from(credentialsBase64, 'base64').toString('utf-8');
-    console.log(decodedCredentials);
-    const [username, password] = decodedCredentials.split(':');
-    console.log(username, password);
+    //const credentialsBase64 = authFormat[1];
+    //const decodedCredentials = Buffer.from(credentialsBase64, 'base64').toString('utf-8');
+    //console.log(decodedCredentials);
+    //const [username, password] = decodedCredentials.split(':');
+    //console.log(username, password);
 
     return true;
   }

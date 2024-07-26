@@ -1,8 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from "@nestjs/common";
-//import UserEntity from "src/entities/users.entity";
 import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateProductDto } from "src/products/dto/update-product.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 
 @Injectable()
@@ -70,7 +69,7 @@ export class UsersRepository {
         return id
     }
 
-    update(id: number, updateUserDto: UpdateProductDto) {
+    update(id: number, updateUserDto: UpdateUserDto) {
         const user = this.findOne(id)
         const updateUser = {
             ...user,

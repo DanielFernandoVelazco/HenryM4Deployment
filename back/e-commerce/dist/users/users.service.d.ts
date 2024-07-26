@@ -26,14 +26,14 @@ export declare class UsersService {
         city: string;
     };
     update(id: number, updateUserDto: UpdateUserDto): {
-        id: number;
-        email: string;
         name: string;
+        email: string;
         password: string;
         address: string;
         phone: string;
         country: string;
         city: string;
+        id: number;
     };
     remove(id: number): number;
     findOneByEmail(email: string): {

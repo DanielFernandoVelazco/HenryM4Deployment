@@ -6,4 +6,6 @@ export declare class UsersController {
     getUsers(): Promise<typeUserObject[]>;
     getUserById(id: string): Promise<typeUserObject>;
     createUser(user: typeUserObject, req: any): Promise<typeUserObject>;
+    updateUser(): string;
+    deleteUser(): string;
 }

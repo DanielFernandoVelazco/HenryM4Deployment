@@ -1,5 +1,5 @@
 import { CreateUserDto } from "./dto/create-user.dto";
-import { UpdateProductDto } from "src/products/dto/update-product.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 export declare class UsersRepository {
     private users;
     finAll(): {
@@ -34,14 +34,14 @@ export declare class UsersRepository {
         city: string;
     };
     remove(id: number): number;
-    update(id: number, updateUserDto: UpdateProductDto): {
-        id: number;
-        email: string;
+    update(id: number, updateUserDto: UpdateUserDto): {
         name: string;
+        email: string;
         password: string;
         address: string;
         phone: string;
         country: string;
         city: string;
+        id: number;
     };
 }
