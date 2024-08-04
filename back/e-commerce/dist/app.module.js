@@ -19,6 +19,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const order_details_module_1 = require("./order-details/order-details.module");
 const orders_module_1 = require("./orders/orders.module");
 const categories_module_1 = require("./categories/categories.module");
+const seeds_module_1 = require("./seeds/seeds.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -38,7 +39,8 @@ exports.AppModule = AppModule = __decorate([
             products_module_1.ProductsModule,
             order_details_module_1.OrderDetailsModule,
             orders_module_1.OrdersModule,
-            categories_module_1.CategoriesModule
+            categories_module_1.CategoriesModule,
+            seeds_module_1.SeedsModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

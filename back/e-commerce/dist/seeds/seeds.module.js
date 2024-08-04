@@ -6,20 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OrderDetailsModule = void 0;
+exports.SeedsModule = void 0;
 const common_1 = require("@nestjs/common");
-const order_details_service_1 = require("./order-details.service");
-const order_details_controller_1 = require("./order-details.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const order_detail_entity_1 = require("./entities/order-detail.entity");
-let OrderDetailsModule = class OrderDetailsModule {
+const category_entity_1 = require("../categories/entities/category.entity");
+const product_entity_1 = require("../products/entities/product.entity");
+const categories_seed_1 = require("./categories/categories.seed");
+const products_seed_1 = require("./products/products.seed");
+let SeedsModule = class SeedsModule {
 };
-exports.OrderDetailsModule = OrderDetailsModule;
-exports.OrderDetailsModule = OrderDetailsModule = __decorate([
+exports.SeedsModule = SeedsModule;
+exports.SeedsModule = SeedsModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([order_detail_entity_1.OrderDetail])],
-        controllers: [order_details_controller_1.OrderDetailsController],
-        providers: [order_details_service_1.OrderDetailsService],
+        imports: [typeorm_1.TypeOrmModule.forFeature([category_entity_1.Category, product_entity_1.Product])],
+        providers: [categories_seed_1.CategoriesSeed, products_seed_1.ProductsSeed],
+        exports: [categories_seed_1.CategoriesSeed, products_seed_1.ProductsSeed],
     })
-], OrderDetailsModule);
-//# sourceMappingURL=order-details.module.js.map
+], SeedsModule);
+//# sourceMappingURL=seeds.module.js.map
