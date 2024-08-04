@@ -1,0 +1,1 @@
+export declare const PostgresDataSourceConfig: (() => import("typeorm/driver/postgres/PostgresConnectionOptions").PostgresConnectionOptions) & import("@nestjs/config").ConfigFactoryKeyHost<import("typeorm/driver/postgres/PostgresConnectionOptions").PostgresConnectionOptions>;

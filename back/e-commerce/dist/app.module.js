@@ -13,12 +13,33 @@ const app_service_1 = require("./app.service");
 const users_module_1 = require("./users/users.module");
 const auth_module_1 = require("./auth/auth.module");
 const products_module_1 = require("./products/products.module");
+const config_1 = require("@nestjs/config");
+const data_source_1 = require("./config/data-source");
+const typeorm_1 = require("@nestjs/typeorm");
+const order_details_module_1 = require("./order-details/order-details.module");
+const orders_module_1 = require("./orders/orders.module");
+const categories_module_1 = require("./categories/categories.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [users_module_1.UsersModule, auth_module_1.AuthModule, products_module_1.ProductsModule],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                load: [data_source_1.PostgresDataSourceConfig],
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                inject: [config_1.ConfigService],
+                useFactory: (ConfigService) => ConfigService.get('postgres'),
+            }),
+            users_module_1.UsersModule,
+            auth_module_1.AuthModule,
+            products_module_1.ProductsModule,
+            order_details_module_1.OrderDetailsModule,
+            orders_module_1.OrdersModule,
+            categories_module_1.CategoriesModule
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })
