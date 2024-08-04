@@ -17,7 +17,7 @@ let OrderDetailsModule = class OrderDetailsModule {
 exports.OrderDetailsModule = OrderDetailsModule;
 exports.OrderDetailsModule = OrderDetailsModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([order_detail_entity_1.OrderDetail])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([order_detail_entity_1.OrdersDetail])],
         controllers: [order_details_controller_1.OrderDetailsController],
         providers: [order_details_service_1.OrderDetailsService],
     })

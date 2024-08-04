@@ -13,6 +13,7 @@ exports.Product = void 0;
 const typeorm_1 = require("typeorm");
 const category_entity_1 = require("../../categories/entities/category.entity");
 const uuid_1 = require("uuid");
+const order_detail_entity_1 = require("../../order-details/entities/order-detail.entity");
 let Product = class Product {
     constructor() {
         this.id = (0, uuid_1.v4)();
@@ -49,6 +50,11 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => category_entity_1.Category, category => category.products),
     __metadata("design:type", category_entity_1.Category)
 ], Product.prototype, "category", void 0);
+__decorate([
+    (0, typeorm_1.ManyToMany)(() => order_detail_entity_1.OrdersDetail, orderDetail => orderDetail.products),
+    (0, typeorm_1.JoinTable)(),
+    __metadata("design:type", Array)
+], Product.prototype, "orderDetails", void 0);
 exports.Product = Product = __decorate([
     (0, typeorm_1.Entity)()
 ], Product);
