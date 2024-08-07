@@ -1,9 +1,13 @@
 /* eslint-disable prettier/prettier */
-import { IsEmail, IsOptional, IsString, Matches } from "class-validator";
+import { IsEmail, IsNotEmpty, IsOptional, IsString, Matches, MaxLength, MinLength } from "class-validator";
 
 export class CreateUserDto {
+    @MaxLength(80)
+    @MinLength(3)
+    @IsNotEmpty()
     @IsString()
     name: string;
+
     @IsEmail()
     email: string;
 
@@ -15,6 +19,7 @@ export class CreateUserDto {
     @IsString()
     address: string;
 
+    @IsNotEmpty()
     @IsString()
     phone: string;
 
@@ -25,4 +30,9 @@ export class CreateUserDto {
     @IsString()
     @IsOptional()
     city?: string;
+
+    @IsString()
+    @IsOptional()
+    createdAt: string;
 }
+

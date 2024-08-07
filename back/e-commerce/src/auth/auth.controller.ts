@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Controller, Post, Body } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { SignInAuthDto } from './dto/signin-dto';
+import { SignInAuthDto } from './dto/signin-auth.dto';
 
 
 @Controller('auth')

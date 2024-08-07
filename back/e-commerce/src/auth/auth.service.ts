@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Injectable } from '@nestjs/common';
 import { UsersService } from 'src/users/users.service';
-import { SignInAuthDto } from './dto/signin-dto';
+import { SignInAuthDto } from './dto/signin-auth.dto';
 
 
 @Injectable()
