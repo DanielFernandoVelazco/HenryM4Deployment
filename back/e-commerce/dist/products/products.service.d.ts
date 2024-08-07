@@ -1,41 +1,16 @@
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ProductsRepository } from './products.repository';
+import { Product } from './entities/product.entity';
+import { Repository } from 'typeorm';
 export declare class ProductsService {
     private readonly productsRepository;
-    constructor(productsRepository: ProductsRepository);
-    create(createProductDto: CreateProductDto): number;
-    findAll(): {
-        id: number;
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imgUrl: string;
-    }[];
-    findOne(id: number): {
-        id: number;
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imgUrl: string;
-    };
-    update(id: number, updateProductDto: UpdateProductDto): {
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imgUrl: string;
-        id: number;
-    };
-    remove(id: number): number;
-    findOneByName(name: string): {
-        id: number;
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imgUrl: string;
-    };
+    constructor(productsRepository: Repository<Product>);
+    create(createProductDto: CreateProductDto): Promise<Product>;
+    findAll(page: number, limit: number): Promise<Product[]>;
+    findOne(id: string): Promise<Product>;
+    update(id: string, updateProductDto: UpdateProductDto): Promise<Product>;
+    remove(id: string): Promise<{
+        id: string;
+    }>;
+    buyProduct(id: string): Promise<Product>;
 }

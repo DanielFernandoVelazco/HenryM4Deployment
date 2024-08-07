@@ -28,13 +28,13 @@ let OrderDetailsController = class OrderDetailsController {
         return this.orderDetailsService.findAll();
     }
     findOne(id) {
-        return this.orderDetailsService.findOne(+id);
+        return this.orderDetailsService.findOne(id);
     }
     update(id, updateOrderDetailDto) {
-        return this.orderDetailsService.update(+id, updateOrderDetailDto);
+        return this.orderDetailsService.update(id, updateOrderDetailDto);
     }
     remove(id) {
-        return this.orderDetailsService.remove(+id);
+        return this.orderDetailsService.remove(id);
     }
 };
 exports.OrderDetailsController = OrderDetailsController;

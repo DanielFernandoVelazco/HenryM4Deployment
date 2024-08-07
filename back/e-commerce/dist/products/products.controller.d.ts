@@ -5,23 +5,11 @@ import { ProductResponseDto } from './dto/response-user.dto';
 export declare class ProductsController {
     private readonly productsService;
     constructor(productsService: ProductsService);
-    findAll(page?: number, limite?: number): {
-        id: number;
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imgUrl: string;
-    }[];
-    create(createProductDto: CreateProductDto): number;
-    findOne(id: string): ProductResponseDto;
-    update(id: string, updateProductDto: UpdateProductDto): {
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imgUrl: string;
-        id: number;
-    };
-    remove(id: string): number;
+    findAll(page?: number, limit?: number): Promise<import("./entities/product.entity").Product[]>;
+    create(createProductDto: CreateProductDto): Promise<import("./entities/product.entity").Product>;
+    findOne(id: string): Promise<ProductResponseDto>;
+    update(id: string, updateProductDto: UpdateProductDto): Promise<import("./entities/product.entity").Product>;
+    remove(id: string): Promise<{
+        id: string;
+    }>;
 }

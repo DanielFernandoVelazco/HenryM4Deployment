@@ -5,5 +5,6 @@ export declare class UserResponseDto {
     phone: string;
     country?: string;
     city?: string;
+    user: string;
     constructor(partial: Partial<UserResponseDto>);
 }

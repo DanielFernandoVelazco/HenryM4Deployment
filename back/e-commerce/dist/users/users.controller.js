@@ -23,21 +23,21 @@ let UsersController = class UsersController {
     constructor(usersService) {
         this.usersService = usersService;
     }
-    findAll(page = 1, limite = 10) {
+    findAll(page = 1, limit = 10) {
         return this.usersService.findAll();
     }
     create(createUserDto) {
         return this.usersService.create(createUserDto);
     }
-    findOne(id) {
-        const user = this.usersService.findOne(+id);
+    async findOne(id) {
+        const user = await this.usersService.findOne(id);
         return new response_user_dto_1.UserResponseDto(user);
     }
     update(id, updateUserDto) {
-        return this.usersService.update(+id, updateUserDto);
+        return this.usersService.update(id, updateUserDto);
     }
     remove(id) {
-        return this.usersService.remove(+id);
+        return this.usersService.remove(id);
     }
 };
 exports.UsersController = UsersController;
@@ -65,7 +65,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], UsersController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),

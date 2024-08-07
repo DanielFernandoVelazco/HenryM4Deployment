@@ -8,37 +8,58 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UsersService = void 0;
 const common_1 = require("@nestjs/common");
-const users_repository_1 = require("./users.repository");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("./entities/user.entity");
+const typeorm_2 = require("typeorm");
+const response_user_dto_1 = require("./dto/response-user.dto");
 let UsersService = class UsersService {
     constructor(usersRepository) {
         this.usersRepository = usersRepository;
     }
     ;
-    create(createUserDto) {
-        return this.usersRepository.create(createUserDto);
+    async create(createUserDto) {
+        const newUser = this.usersRepository.create(createUserDto);
+        return this.usersRepository.save(newUser);
     }
-    findAll() {
-        return this.usersRepository.finAll();
+    async findAll() {
+        const users = this.usersRepository.find();
+        return (await users).map((user) => new response_user_dto_1.UserResponseDto(user));
     }
-    findOne(id) {
-        return this.usersRepository.findOne(id);
+    async findOne(id) {
+        const user = await this.usersRepository.findOneBy({ id });
+        if (!user) {
+            return null;
+        }
+        return new response_user_dto_1.UserResponseDto(user);
     }
-    update(id, updateUserDto) {
-        return this.usersRepository.update(id, updateUserDto);
+    async update(id, updateUserDto) {
+        await this.usersRepository.update(id, updateUserDto);
+        const user = await this.usersRepository.findOneBy({ id });
+        return new response_user_dto_1.UserResponseDto(user);
     }
-    remove(id) {
-        return this.usersRepository.remove(id);
+    async remove(id) {
+        return this.usersRepository.delete(id);
     }
-    findOneByEmail(email) {
-        return this.usersRepository.findOneByEmail(email);
+    async findOneBy(id) {
+        return this.usersRepository.findOneBy({ id });
+    }
+    async findOneByEmail(email) {
+        const user = await this.usersRepository.findOne({
+            where: { email },
+        });
+        return user;
     }
 };
 exports.UsersService = UsersService;
 exports.UsersService = UsersService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_repository_1.UsersRepository])
+    __param(0, (0, typeorm_1.InjectRepository)(user_entity_1.User)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], UsersService);
 //# sourceMappingURL=users.service.js.map

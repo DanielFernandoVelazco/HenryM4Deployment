@@ -16,8 +16,8 @@ let AuthService = class AuthService {
     constructor(userService) {
         this.userService = userService;
     }
-    signIn(Credentials) {
-        const user = this.userService.findOneByEmail(Credentials.email);
+    async signIn(Credentials) {
+        const user = await this.userService.findOneByEmail(Credentials.email);
         if (user && user.password === Credentials.password) {
             return "You are logged in";
         }

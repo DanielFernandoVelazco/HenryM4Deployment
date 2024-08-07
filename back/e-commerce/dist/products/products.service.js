@@ -8,36 +8,57 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsService = void 0;
 const common_1 = require("@nestjs/common");
-const products_repository_1 = require("./products.repository");
+const product_entity_1 = require("./entities/product.entity");
+const typeorm_1 = require("@nestjs/typeorm");
+const typeorm_2 = require("typeorm");
 let ProductsService = class ProductsService {
     constructor(productsRepository) {
         this.productsRepository = productsRepository;
     }
-    create(createProductDto) {
-        return this.productsRepository.create(createProductDto);
+    async create(createProductDto) {
+        const newProduct = this.productsRepository.create(createProductDto);
+        return await this.productsRepository.save(newProduct);
     }
-    findAll() {
-        return this.productsRepository.findAll();
+    async findAll(page, limit) {
+        return await this.productsRepository.find({
+            take: limit,
+            skip: (page - 1) * limit
+        });
     }
-    findOne(id) {
-        return this.productsRepository.findOne(id);
+    async findOne(id) {
+        return await this.productsRepository.findOneBy({ id });
     }
-    update(id, updateProductDto) {
-        return this.productsRepository.update(id, updateProductDto);
+    async update(id, updateProductDto) {
+        console.log('UpdateProductDto', updateProductDto);
+        await this.productsRepository.update(id, updateProductDto);
+        return this.productsRepository.findOneBy({ id });
     }
-    remove(id) {
-        return this.productsRepository.remove(id);
+    async remove(id) {
+        await this.productsRepository.delete(id);
+        return { id };
     }
-    findOneByName(name) {
-        return this.productsRepository.findOneByName(name);
+    async buyProduct(id) {
+        const product = await this.productsRepository.findOneBy({ id });
+        if (product.stock <= 0) {
+            throw new Error('Out of stock');
+        }
+        await this.productsRepository.update(id, {
+            stock: product.stock - 1,
+        });
+        console.log('Product bought successfully');
+        return this.productsRepository.findOneBy({ id });
     }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [products_repository_1.ProductsRepository])
+    __param(0, (0, typeorm_1.InjectRepository)(product_entity_1.Product)),
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], ProductsService);
 //# sourceMappingURL=products.service.js.map

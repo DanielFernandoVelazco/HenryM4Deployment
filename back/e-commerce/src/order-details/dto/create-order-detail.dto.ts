@@ -1,1 +1,6 @@
-export class CreateOrderDetailDto {}
+/* eslint-disable prettier/prettier */
+export class CreateOrderDetailDto {
+    price: number
+    order: object
+    products: Array<object>
+}

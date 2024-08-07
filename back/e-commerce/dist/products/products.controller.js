@@ -23,21 +23,21 @@ let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
     }
-    findAll(page = 1, limite = 10) {
-        return this.productsService.findAll();
+    findAll(page = 1, limit = 10) {
+        return this.productsService.findAll(page, limit);
     }
     create(createProductDto) {
         return this.productsService.create(createProductDto);
     }
-    findOne(id) {
-        const product = this.productsService.findOne(+id);
+    async findOne(id) {
+        const product = await this.productsService.findOne(id);
         return new response_user_dto_1.ProductResponseDto(product);
     }
     update(id, updateProductDto) {
-        return this.productsService.update(+id, updateProductDto);
+        return this.productsService.update(id, updateProductDto);
     }
     remove(id) {
-        return this.productsService.remove(+id);
+        return this.productsService.remove(id);
     }
 };
 exports.ProductsController = ProductsController;
@@ -65,7 +65,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),

@@ -2,6 +2,7 @@ export declare class CreateProductDto {
     name: string;
     description: string;
     price: number;
-    stock: boolean;
+    stock: number;
+    product: string;
     imgUrl: string;
 }

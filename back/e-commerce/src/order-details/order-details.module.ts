@@ -9,5 +9,6 @@ import { OrdersDetail } from './entities/order-detail.entity';
   imports: [TypeOrmModule.forFeature([OrdersDetail])],
   controllers: [OrderDetailsController],
   providers: [OrderDetailsService],
+  exports: [OrderDetailsService]
 })
 export class OrderDetailsModule { }

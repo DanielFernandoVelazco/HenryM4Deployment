@@ -9,8 +9,8 @@ export class AuthService {
 
   constructor(private readonly userService: UsersService) { }
 
-  signIn(Credentials: SignInAuthDto) {
-    const user = this.userService.findOneByEmail(Credentials.email);
+  async signIn(Credentials: SignInAuthDto) {
+    const user = await this.userService.findOneByEmail(Credentials.email);
     if (user && user.password === Credentials.password) {
       return "You are logged in";
     }

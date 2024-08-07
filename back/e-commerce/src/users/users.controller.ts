@@ -14,7 +14,7 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   findAll(
     @Query('page') page: number = 1,
-    @Query('limit') limite: number = 10,
+    @Query('limit') limit: number = 10,
   ) {
     return this.usersService.findAll();
   }
@@ -28,20 +28,20 @@ export class UsersController {
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
-  findOne(@Param('id') id: string) {
-    const user = this.usersService.findOne(+id);
+  async findOne(@Param('id') id: string) {
+    const user = await this.usersService.findOne(id);
     return new UserResponseDto(user);
   }
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.usersService.update(+id, updateUserDto);
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    return this.usersService.remove(id);
   }
 }

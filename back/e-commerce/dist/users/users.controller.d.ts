@@ -5,27 +5,9 @@ import { UserResponseDto } from './dto/response-user.dto';
 export declare class UsersController {
     private readonly usersService;
     constructor(usersService: UsersService);
-    findAll(page?: number, limite?: number): {
-        id: number;
-        email: string;
-        name: string;
-        password: string;
-        address: string;
-        phone: string;
-        country: string;
-        city: string;
-    }[];
-    create(createUserDto: CreateUserDto): number;
-    findOne(id: string): UserResponseDto;
-    update(id: string, updateUserDto: UpdateUserDto): {
-        name: string;
-        email: string;
-        password: string;
-        address: string;
-        phone: string;
-        country: string;
-        city: string;
-        id: number;
-    };
-    remove(id: string): number;
+    findAll(page?: number, limit?: number): Promise<UserResponseDto[]>;
+    create(createUserDto: CreateUserDto): Promise<import("./entities/user.entity").User>;
+    findOne(id: string): Promise<UserResponseDto>;
+    update(id: string, updateUserDto: UpdateUserDto): Promise<UserResponseDto>;
+    remove(id: string): Promise<import("typeorm").DeleteResult>;
 }

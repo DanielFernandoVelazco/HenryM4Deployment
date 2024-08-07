@@ -27,9 +27,13 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "price", void 0);
 __decorate([
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
+    (0, class_validator_1.IsNumber)(),
+    __metadata("design:type", Number)
 ], CreateProductDto.prototype, "stock", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateProductDto.prototype, "product", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
