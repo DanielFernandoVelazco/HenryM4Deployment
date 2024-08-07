@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { DataSourceOptions } from 'typeorm';
+import { DataSource, DataSourceOptions } from 'typeorm';
 import * as dotenv from 'dotenv';
 import { registerAs } from '@nestjs/config';
 
@@ -9,7 +9,7 @@ dotenv.config(
     }
 );
 
-const PostgresDataSource: DataSourceOptions = {
+const PostgresDataSourceOptions: DataSourceOptions = {
     type: 'postgres',
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
@@ -20,6 +20,9 @@ const PostgresDataSource: DataSourceOptions = {
     logging: true,
     entities: ['dist/**/*.entity{.ts,.js}'],
     migrations: ['dist/migrations/*{.ts,.js}'],
+    dropSchema: true,
 }
 
-export const PostgresDataSourceConfig = registerAs('postgres', () => PostgresDataSource)
+export const PostgresDataSourceConfig = registerAs('postgres', () => PostgresDataSourceOptions)
+
+export const PostgresDataSource = new DataSource(PostgresDataSourceOptions)
