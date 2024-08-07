@@ -1,5 +1,5 @@
 import { UsersService } from 'src/users/users.service';
-import { SignInAuthDto } from './dto/signin-dto';
+import { SignInAuthDto } from './dto/signin-auth.dto';
 export declare class AuthService {
     private readonly userService;
     constructor(userService: UsersService);

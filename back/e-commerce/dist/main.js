@@ -6,8 +6,10 @@ const logger_middleware_1 = require("./middleware/logger.middleware");
 require("reflect-metadata");
 const categories_seed_1 = require("./seeds/categories/categories.seed");
 const products_seed_1 = require("./seeds/products/products.seed");
+const validation_pipe_1 = require("./pipes-validation/validation.pipe");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.useGlobalPipes(new validation_pipe_1.ValidationPipe());
     app.use(logger_middleware_1.loggerGlobal);
     const categoriesSeed = app.get(categories_seed_1.CategoriesSeed);
     await categoriesSeed.seed();

@@ -1,17 +1,16 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query, ParseUUIDPipe, HttpException } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { ProductResponseDto } from './dto/response-user.dto';
-import { AuthGuard } from 'src/guard/auth/auth.guard';
+import { IsUUID } from 'class-validator';
 
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) { }
 
   @Get()
-  @HttpCode(HttpStatus.OK)
+  @HttpCode(200)
   findAll(
     @Query('page') page: number = 1,
     @Query('limit') limit: number = 10,
@@ -20,28 +19,44 @@ export class ProductsController {
   }
 
   @Post()
-  @HttpCode(HttpStatus.CREATED)
+  @HttpCode(201)
   create(@Body() createProductDto: CreateProductDto) {
     return this.productsService.create(createProductDto);
   }
 
   @Get(':id')
-  @HttpCode(HttpStatus.OK)
-  @UseGuards(AuthGuard)
-  async findOne(@Param('id') id: string): Promise<ProductResponseDto> {
+  @HttpCode(200)
+  async findOne(@Param('id', new ParseUUIDPipe()) id: string) {
     const product = await this.productsService.findOne(id);
-    return new ProductResponseDto(product);
+    if (!IsUUID(4, { each: true })) {
+      throw new HttpException('Invalid UUID', HttpStatus.BAD_REQUEST);
+    }
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+    }
+    return product;
   }
 
   @Put(':id')
-  @HttpCode(HttpStatus.OK)
-  update(@Param('id') id: string, @Body() updateProductDto: UpdateProductDto) {
+  @HttpCode(200)
+  async update(
+    @Param('id') id: string,
+    @Body() updateProductDto: Partial<UpdateProductDto>,
+  ) {
+    const product = await this.productsService.findOne(id);
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+    }
     return this.productsService.update(id, updateProductDto);
   }
 
   @Delete(':id')
-  @HttpCode(HttpStatus.OK)
-  remove(@Param('id') id: string) {
+  @HttpCode(200)
+  async remove(@Param('id', new ParseUUIDPipe()) id: string) {
+    const product = await this.productsService.findOne(id);
+    if (!product) {
+      throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
+    }
     return this.productsService.remove(id);
   }
 }

@@ -16,9 +16,7 @@ exports.ProductsController = void 0;
 const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
-const update_product_dto_1 = require("./dto/update-product.dto");
-const response_user_dto_1 = require("./dto/response-user.dto");
-const auth_guard_1 = require("../guard/auth/auth.guard");
+const class_validator_1 = require("class-validator");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -31,19 +29,33 @@ let ProductsController = class ProductsController {
     }
     async findOne(id) {
         const product = await this.productsService.findOne(id);
-        return new response_user_dto_1.ProductResponseDto(product);
+        if (!(0, class_validator_1.IsUUID)(4, { each: true })) {
+            throw new common_1.HttpException('Invalid UUID', common_1.HttpStatus.BAD_REQUEST);
+        }
+        if (!product) {
+            throw new common_1.HttpException('Product not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return product;
     }
-    update(id, updateProductDto) {
+    async update(id, updateProductDto) {
+        const product = await this.productsService.findOne(id);
+        if (!product) {
+            throw new common_1.HttpException('Product not found', common_1.HttpStatus.NOT_FOUND);
+        }
         return this.productsService.update(id, updateProductDto);
     }
-    remove(id) {
+    async remove(id) {
+        const product = await this.productsService.findOne(id);
+        if (!product) {
+            throw new common_1.HttpException('Product not found', common_1.HttpStatus.NOT_FOUND);
+        }
         return this.productsService.remove(id);
     }
 };
 exports.ProductsController = ProductsController;
 __decorate([
     (0, common_1.Get)(),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, common_1.HttpCode)(200),
     __param(0, (0, common_1.Query)('page')),
     __param(1, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
@@ -52,7 +64,7 @@ __decorate([
 ], ProductsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Post)(),
-    (0, common_1.HttpCode)(common_1.HttpStatus.CREATED),
+    (0, common_1.HttpCode)(201),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_product_dto_1.CreateProductDto]),
@@ -60,29 +72,28 @@ __decorate([
 ], ProductsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(':id'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.HttpCode)(200),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    (0, common_1.HttpCode)(200),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_product_dto_1.UpdateProductDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
-    (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Param)('id')),
+    (0, common_1.HttpCode)(200),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "remove", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, common_1.Controller)('products'),

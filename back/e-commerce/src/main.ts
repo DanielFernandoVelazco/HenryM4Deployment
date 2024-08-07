@@ -5,12 +5,12 @@ import { loggerGlobal } from './middleware/logger.middleware';
 import 'reflect-metadata';
 import { CategoriesSeed } from './seeds/categories/categories.seed';
 import { ProductsSeed } from './seeds/products/products.seed';
-import { validationPipe } from './pipes-validation/validation.pipe';
+import { ValidationPipe } from './pipes-validation/validation.pipe';
 
 async function bootstrap() {
 
   const app = await NestFactory.create(AppModule);
-  app.useGlobalPipes(new validationPipe());
+  app.useGlobalPipes(new ValidationPipe());
   app.use(loggerGlobal);
 
   const categoriesSeed = app.get(CategoriesSeed);
