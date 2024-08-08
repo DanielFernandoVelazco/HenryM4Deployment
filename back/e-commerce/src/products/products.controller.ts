@@ -1,9 +1,11 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query, ParseUUIDPipe, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query, ParseUUIDPipe, HttpException, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { IsUUID } from 'class-validator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ImageUploadPipe } from 'src/pipes-validation/image/image-upload/image-upload.pipe';
 
 @Controller('products')
 export class ProductsController {
@@ -47,16 +49,31 @@ export class ProductsController {
     if (!product) {
       throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
     }
-    return this.productsService.update(id, updateProductDto);
+
+    const updateProduct = await this.productsService.update(
+      id,
+      updateProductDto as UpdateProductDto,
+    )
+    return updateProduct;
   }
 
   @Delete(':id')
   @HttpCode(200)
-  async remove(@Param('id', new ParseUUIDPipe()) id: string) {
-    const product = await this.productsService.findOne(id);
+  remove(@Param('id') id: string) {
+    const product = this.productsService.findOne(id);
     if (!product) {
       throw new HttpException('Product not found', HttpStatus.NOT_FOUND);
     }
     return this.productsService.remove(id);
+  }
+
+  @Post(':id/upload')
+  @HttpCode(200)
+  @UseInterceptors(FileInterceptor('file'))
+  async uploadfile(
+    @Param('id') id: string,
+    @UploadedFile(new ImageUploadPipe()) file: Express.Multer.File,
+  ) {
+    return await this.productsService.uploadFile(file, id);
   }
 }

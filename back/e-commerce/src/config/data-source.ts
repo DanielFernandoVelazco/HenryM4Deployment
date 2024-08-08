@@ -20,7 +20,7 @@ const PostgresDataSourceOptions: DataSourceOptions = {
     logging: true,
     entities: ['dist/**/*.entity{.ts,.js}'],
     migrations: ['dist/migrations/*{.ts,.js}'],
-    dropSchema: true,
+    //dropSchema: true,
 }
 
 export const PostgresDataSourceConfig = registerAs('postgres', () => PostgresDataSourceOptions)

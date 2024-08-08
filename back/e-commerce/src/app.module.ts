@@ -12,6 +12,8 @@ import { OrderDetailsModule } from './order-details/order-details.module';
 import { OrdersModule } from './orders/orders.module';
 import { CategoriesModule } from './categories/categories.module';
 import { SeedsModule } from './seeds/seeds.module';
+import { CloudinaryService } from './service/cloudinary/cloudinary.service';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -30,8 +32,9 @@ import { SeedsModule } from './seeds/seeds.module';
     OrdersModule,
     CategoriesModule,
     SeedsModule,
+    FileUploadModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CloudinaryService],
 })
 export class AppModule { }

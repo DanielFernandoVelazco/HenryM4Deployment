@@ -17,6 +17,8 @@ const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
 const class_validator_1 = require("class-validator");
+const platform_express_1 = require("@nestjs/platform-express");
+const image_upload_pipe_1 = require("../pipes-validation/image/image-upload/image-upload.pipe");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -42,14 +44,18 @@ let ProductsController = class ProductsController {
         if (!product) {
             throw new common_1.HttpException('Product not found', common_1.HttpStatus.NOT_FOUND);
         }
-        return this.productsService.update(id, updateProductDto);
+        const updateProduct = await this.productsService.update(id, updateProductDto);
+        return updateProduct;
     }
-    async remove(id) {
-        const product = await this.productsService.findOne(id);
+    remove(id) {
+        const product = this.productsService.findOne(id);
         if (!product) {
             throw new common_1.HttpException('Product not found', common_1.HttpStatus.NOT_FOUND);
         }
         return this.productsService.remove(id);
+    }
+    async uploadfile(id, file) {
+        return await this.productsService.uploadFile(file, id);
     }
 };
 exports.ProductsController = ProductsController;
@@ -90,11 +96,21 @@ __decorate([
 __decorate([
     (0, common_1.Delete)(':id'),
     (0, common_1.HttpCode)(200),
-    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
+    __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "remove", null);
+__decorate([
+    (0, common_1.Post)(':id/upload'),
+    (0, common_1.HttpCode)(200),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.UploadedFile)(new image_upload_pipe_1.ImageUploadPipe())),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Object]),
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "uploadfile", null);
 exports.ProductsController = ProductsController = __decorate([
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])

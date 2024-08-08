@@ -18,7 +18,6 @@ const PostgresDataSourceOptions = {
     logging: true,
     entities: ['dist/**/*.entity{.ts,.js}'],
     migrations: ['dist/migrations/*{.ts,.js}'],
-    dropSchema: true,
 };
 exports.PostgresDataSourceConfig = (0, config_1.registerAs)('postgres', () => PostgresDataSourceOptions);
 exports.PostgresDataSource = new typeorm_1.DataSource(PostgresDataSourceOptions);

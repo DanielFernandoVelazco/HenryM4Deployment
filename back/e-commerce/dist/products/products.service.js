@@ -17,9 +17,11 @@ const common_1 = require("@nestjs/common");
 const product_entity_1 = require("./entities/product.entity");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
+const file_upload_service_1 = require("../file-upload/file-upload.service");
 let ProductsService = class ProductsService {
-    constructor(productsRepository) {
+    constructor(productsRepository, fileUploadService) {
         this.productsRepository = productsRepository;
+        this.fileUploadService = fileUploadService;
     }
     async create(createProductDto) {
         const newProduct = this.productsRepository.create(createProductDto);
@@ -54,11 +56,23 @@ let ProductsService = class ProductsService {
         console.log('Product bought successfully');
         return this.productsRepository.findOneBy({ id });
     }
+    async uploadFile(file, id) {
+        const url = await this.fileUploadService.uploadfile({
+            fieldname: file.fieldname,
+            buffer: file.buffer,
+            originalname: file.originalname,
+            mimetype: file.mimetype,
+            size: file.size,
+        });
+        await this.productsRepository.update(id, { imgUrl: url });
+        return { imgUrl: url };
+    }
 };
 exports.ProductsService = ProductsService;
 exports.ProductsService = ProductsService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(product_entity_1.Product)),
-    __metadata("design:paramtypes", [typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository,
+        file_upload_service_1.FileUploadService])
 ], ProductsService);
 //# sourceMappingURL=products.service.js.map
