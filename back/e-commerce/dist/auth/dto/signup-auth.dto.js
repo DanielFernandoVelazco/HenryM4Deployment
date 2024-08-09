@@ -9,45 +9,50 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateUserDto = void 0;
+exports.SignUpAuthDto = void 0;
 const class_validator_1 = require("class-validator");
-class CreateUserDto {
+class SignUpAuthDto {
 }
-exports.CreateUserDto = CreateUserDto;
+exports.SignUpAuthDto = SignUpAuthDto;
 __decorate([
     (0, class_validator_1.MaxLength)(80),
     (0, class_validator_1.MinLength)(3),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "name", void 0);
+], SignUpAuthDto.prototype, "name", void 0);
 __decorate([
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "email", void 0);
+], SignUpAuthDto.prototype, "email", void 0);
 __decorate([
     (0, class_validator_1.Matches)(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/, {
         message: 'La contraseña debe contener al menos una letra mayúscula, un número, un caracter especial y debe tener entre 8 y 15 caracteres'
     }),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "password", void 0);
-__decorate([
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "address", void 0);
+], SignUpAuthDto.prototype, "password", void 0);
 __decorate([
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "phone", void 0);
+], SignUpAuthDto.prototype, "passwordConfirm", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SignUpAuthDto.prototype, "address", void 0);
+__decorate([
+    (0, class_validator_1.IsNotEmpty)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], SignUpAuthDto.prototype, "phone", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "country", void 0);
+], SignUpAuthDto.prototype, "country", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
-], CreateUserDto.prototype, "city", void 0);
-//# sourceMappingURL=create-user.dto.js.map
+], SignUpAuthDto.prototype, "city", void 0);
+//# sourceMappingURL=signup-auth.dto.js.map

@@ -9,5 +9,4 @@ export declare class User {
     coutry: string;
     city: string;
     orders: Order[];
-    createdAt: string;
 }

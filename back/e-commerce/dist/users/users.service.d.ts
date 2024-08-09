@@ -12,5 +12,9 @@ export declare class UsersService {
     update(id: string, updateUserDto: UpdateUserDto): Promise<UserResponseDto>;
     remove(id: string): Promise<import("typeorm").DeleteResult>;
     findOneBy(id: string): Promise<User>;
-    findOneByEmail(email: string): Promise<User | null>;
+    findByEmail(email: string): Promise<User>;
+    pag(page: any, limit: any): {
+        page: any;
+        limit: any;
+    };
 }

@@ -22,6 +22,7 @@ const categories_module_1 = require("./categories/categories.module");
 const seeds_module_1 = require("./seeds/seeds.module");
 const cloudinary_service_1 = require("./service/cloudinary/cloudinary.service");
 const file_upload_module_1 = require("./file-upload/file-upload.module");
+const shared_module_1 = require("./shared/shared/shared.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -44,6 +45,7 @@ exports.AppModule = AppModule = __decorate([
             categories_module_1.CategoriesModule,
             seeds_module_1.SeedsModule,
             file_upload_module_1.FileUploadModule,
+            shared_module_1.SharedModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService, cloudinary_service_1.CloudinaryService],

@@ -49,11 +49,14 @@ let UsersService = class UsersService {
     async findOneBy(id) {
         return this.usersRepository.findOneBy({ id });
     }
-    async findOneByEmail(email) {
-        const user = await this.usersRepository.findOne({
-            where: { email },
-        });
-        return user;
+    async findByEmail(email) {
+        return this.usersRepository.findOne({ where: { email: email } });
+    }
+    pag(page, limit) {
+        return {
+            page,
+            limit
+        };
     }
 };
 exports.UsersService = UsersService;

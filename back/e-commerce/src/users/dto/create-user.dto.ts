@@ -31,8 +31,8 @@ export class CreateUserDto {
     @IsOptional()
     city?: string;
 
-    @IsString()
-    @IsOptional()
-    createdAt: string;
+    //@IsString()
+    //@IsOptional()
+    //createdAt: string;
 }
 

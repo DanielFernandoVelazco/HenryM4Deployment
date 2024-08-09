@@ -34,6 +34,6 @@ export class User {
     @OneToMany(() => Order, order => order.user)
     orders: Order[];
 
-    @Column()
-    createdAt: string;
+    //@Column()
+    //createdAt: string;
 }
