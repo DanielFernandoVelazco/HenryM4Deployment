@@ -29,6 +29,11 @@ let AuthController = class AuthController {
         const user = await this.authService.signUp(signUpUser);
         return new response_user_dto_1.UserResponseDto(user);
     }
+    getAuth0Protected(request) {
+        console.log(JSON.stringify(request.oidc));
+        console.log(JSON.stringify(request.oidc.user));
+        return JSON.stringify(request.oidc.user);
+    }
 };
 exports.AuthController = AuthController;
 __decorate([
@@ -46,6 +51,13 @@ __decorate([
     __metadata("design:paramtypes", [signup_auth_dto_1.SignUpAuthDto, Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "signUp", null);
+__decorate([
+    (0, common_1.Get)('auth0/protected'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "getAuth0Protected", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)('auth'),
     __metadata("design:paramtypes", [auth_service_1.AuthService])

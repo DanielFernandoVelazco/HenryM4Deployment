@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { Controller, Post, Body, Req } from '@nestjs/common';
+import { Controller, Post, Body, Req, Get } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignInAuthDto } from './dto/signin-auth.dto';
 import { SignUpAuthDto } from './dto/signup-auth.dto';
@@ -21,4 +21,10 @@ export class AuthController {
     return new UserResponseDto(user)
   }
 
+  @Get('auth0/protected')
+  getAuth0Protected(@Req() request) {
+    console.log(JSON.stringify(request.oidc));
+    console.log(JSON.stringify(request.oidc.user));
+    return JSON.stringify(request.oidc.user);
+  }
 }

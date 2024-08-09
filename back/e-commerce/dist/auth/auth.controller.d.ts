@@ -9,4 +9,5 @@ export declare class AuthController {
         token: string;
     }>;
     signUp(signUpUser: SignUpAuthDto, request: any): Promise<UserResponseDto>;
+    getAuth0Protected(request: any): string;
 }
