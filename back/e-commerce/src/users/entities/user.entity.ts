@@ -2,6 +2,10 @@
 import { Order } from "src/orders/entities/order.entity";
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuid } from 'uuid';
+export enum Role {
+    User = 'user',
+    Admin = 'admin',
+}
 
 @Entity()
 export class User {
@@ -33,6 +37,9 @@ export class User {
 
     @OneToMany(() => Order, order => order.user)
     orders: Order[];
+
+    @Column({ default: Role.User })
+    administrator: string;
 
     //@Column()
     //createdAt: string;

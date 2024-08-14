@@ -11,6 +11,7 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
   @Get()
+  @UseGuards(AuthGuard)
   @HttpCode(HttpStatus.OK)
   findAll(
     @Query('page') page: number = 1,

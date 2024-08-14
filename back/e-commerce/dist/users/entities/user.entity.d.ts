@@ -1,4 +1,8 @@
 import { Order } from "src/orders/entities/order.entity";
+export declare enum Role {
+    User = "user",
+    Admin = "admin"
+}
 export declare class User {
     id: string;
     name: string;
@@ -9,4 +13,5 @@ export declare class User {
     coutry: string;
     city: string;
     orders: Order[];
+    administrator: string;
 }

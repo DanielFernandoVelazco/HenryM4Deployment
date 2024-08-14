@@ -35,6 +35,10 @@ export class SignUpAuthDto {
     @IsOptional()
     city?: string;
 
+    constructor(partial: Partial<SignUpAuthDto>) {
+        Object.assign(this, partial);
+    }
+
     //@IsString()
     //@IsOptional()
     //createdAt: string;

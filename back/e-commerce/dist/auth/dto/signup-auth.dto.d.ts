@@ -7,4 +7,5 @@ export declare class SignUpAuthDto {
     phone: string;
     country?: string;
     city?: string;
+    constructor(partial: Partial<SignUpAuthDto>);
 }

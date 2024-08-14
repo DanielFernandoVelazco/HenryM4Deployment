@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignUpAuthDto = void 0;
 const class_validator_1 = require("class-validator");
 class SignUpAuthDto {
+    constructor(partial) {
+        Object.assign(this, partial);
+    }
 }
 exports.SignUpAuthDto = SignUpAuthDto;
 __decorate([
