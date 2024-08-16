@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Category = void 0;
+const openapi = require("@nestjs/swagger");
+const swagger_1 = require("@nestjs/swagger");
 const product_entity_1 = require("../../products/entities/product.entity");
 const typeorm_1 = require("typeorm");
 const uuid_1 = require("uuid");
@@ -17,19 +19,37 @@ let Category = class Category {
     constructor() {
         this.id = (0, uuid_1.v4)();
     }
+    static _OPENAPI_METADATA_FACTORY() {
+        return { id: { required: true, type: () => String, default: (0, uuid_1.v4)() }, name: { required: true, type: () => String }, products: { required: true, type: () => [require("../../products/entities/product.entity").Product] } };
+    }
 };
 exports.Category = Category;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the uuid',
+        required: true
+    }),
     (0, typeorm_1.PrimaryGeneratedColumn)('uuid'),
     __metadata("design:type", String)
 ], Category.prototype, "id", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the category',
+        required: true
+    }),
     (0, typeorm_1.Column)({
         length: 100,
     }),
     __metadata("design:type", String)
 ], Category.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the product',
+        required: true
+    }),
     (0, typeorm_1.OneToMany)(() => product_entity_1.Product, product => product.category),
     __metadata("design:type", Array)
 ], Category.prototype, "products", void 0);

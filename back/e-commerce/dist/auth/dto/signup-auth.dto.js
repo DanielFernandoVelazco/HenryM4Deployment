@@ -10,14 +10,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SignUpAuthDto = void 0;
+const openapi = require("@nestjs/swagger");
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class SignUpAuthDto {
     constructor(partial) {
         Object.assign(this, partial);
     }
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: true, type: () => String, minLength: 3, maxLength: 80 }, email: { required: true, type: () => String }, password: { required: true, type: () => String, pattern: "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$/" }, passwordConfirm: { required: true, type: () => String }, address: { required: true, type: () => String }, phone: { required: true, type: () => String }, country: { required: false, type: () => String }, city: { required: false, type: () => String } };
+    }
 }
 exports.SignUpAuthDto = SignUpAuthDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the user',
+        required: true
+    }),
     (0, class_validator_1.MaxLength)(80),
     (0, class_validator_1.MinLength)(3),
     (0, class_validator_1.IsNotEmpty)(),
@@ -25,35 +35,70 @@ __decorate([
     __metadata("design:type", String)
 ], SignUpAuthDto.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the Email',
+        required: true
+    }),
     (0, class_validator_1.IsEmail)(),
     __metadata("design:type", String)
 ], SignUpAuthDto.prototype, "email", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the password',
+        required: true
+    }),
     (0, class_validator_1.Matches)(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,15}$/, {
         message: 'La contraseña debe contener al menos una letra mayúscula, un número, un caracter especial y debe tener entre 8 y 15 caracteres'
     }),
     __metadata("design:type", String)
 ], SignUpAuthDto.prototype, "password", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the password',
+        required: true
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SignUpAuthDto.prototype, "passwordConfirm", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the adress',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SignUpAuthDto.prototype, "address", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Number of the phone',
+        required: true
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], SignUpAuthDto.prototype, "phone", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the country',
+        required: false
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)
 ], SignUpAuthDto.prototype, "country", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the city',
+        required: false
+    }),
     (0, class_validator_1.IsString)(),
     (0, class_validator_1.IsOptional)(),
     __metadata("design:type", String)

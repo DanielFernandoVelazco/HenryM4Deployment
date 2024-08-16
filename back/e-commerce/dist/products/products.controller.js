@@ -13,6 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProductsController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
@@ -20,6 +21,7 @@ const class_validator_1 = require("class-validator");
 const platform_express_1 = require("@nestjs/platform-express");
 const image_upload_pipe_1 = require("../pipes-validation/image/image-upload/image-upload.pipe");
 const auth_guard_1 = require("../guard/auth/auth.guard");
+const swagger_1 = require("@nestjs/swagger");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -63,6 +65,7 @@ exports.ProductsController = ProductsController;
 __decorate([
     (0, common_1.Get)(),
     (0, common_1.HttpCode)(200),
+    openapi.ApiResponse({ status: 200, type: [require("./entities/product.entity").Product] }),
     __param(0, (0, common_1.Query)('page')),
     __param(1, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
@@ -72,6 +75,7 @@ __decorate([
 __decorate([
     (0, common_1.Post)(),
     (0, common_1.HttpCode)(201),
+    openapi.ApiResponse({ status: 201, type: require("./entities/product.entity").Product }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_product_dto_1.CreateProductDto]),
@@ -80,6 +84,7 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':id'),
     (0, common_1.HttpCode)(200),
+    openapi.ApiResponse({ status: 200, type: require("./entities/product.entity").Product }),
     __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -88,6 +93,7 @@ __decorate([
 __decorate([
     (0, common_1.Put)(':id'),
     (0, common_1.HttpCode)(200),
+    openapi.ApiResponse({ status: 200, type: require("./entities/product.entity").Product }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -97,6 +103,7 @@ __decorate([
 __decorate([
     (0, common_1.Delete)(':id'),
     (0, common_1.HttpCode)(200),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -107,6 +114,7 @@ __decorate([
     (0, common_1.HttpCode)(200),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
     (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
+    openapi.ApiResponse({ status: 200 }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.UploadedFile)(new image_upload_pipe_1.ImageUploadPipe())),
     __metadata("design:type", Function),
@@ -114,6 +122,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProductsController.prototype, "uploadfile", null);
 exports.ProductsController = ProductsController = __decorate([
+    (0, swagger_1.ApiTags)('products'),
     (0, common_1.Controller)('products'),
     __metadata("design:paramtypes", [products_service_1.ProductsService])
 ], ProductsController);

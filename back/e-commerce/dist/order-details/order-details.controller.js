@@ -13,10 +13,12 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrderDetailsController = void 0;
+const openapi = require("@nestjs/swagger");
 const common_1 = require("@nestjs/common");
 const order_details_service_1 = require("./order-details.service");
 const create_order_detail_dto_1 = require("./dto/create-order-detail.dto");
 const update_order_detail_dto_1 = require("./dto/update-order-detail.dto");
+const swagger_1 = require("@nestjs/swagger");
 let OrderDetailsController = class OrderDetailsController {
     constructor(orderDetailsService) {
         this.orderDetailsService = orderDetailsService;
@@ -40,6 +42,7 @@ let OrderDetailsController = class OrderDetailsController {
 exports.OrderDetailsController = OrderDetailsController;
 __decorate([
     (0, common_1.Post)(),
+    openapi.ApiResponse({ status: 201, type: Object }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [create_order_detail_dto_1.CreateOrderDetailDto]),
@@ -47,12 +50,14 @@ __decorate([
 ], OrderDetailsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
+    openapi.ApiResponse({ status: 200, type: String }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], OrderDetailsController.prototype, "findAll", null);
 __decorate([
     (0, common_1.Get)(':id'),
+    openapi.ApiResponse({ status: 200, type: String }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -60,6 +65,7 @@ __decorate([
 ], OrderDetailsController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Patch)(':id'),
+    openapi.ApiResponse({ status: 200, type: String }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -68,12 +74,14 @@ __decorate([
 ], OrderDetailsController.prototype, "update", null);
 __decorate([
     (0, common_1.Delete)(':id'),
+    openapi.ApiResponse({ status: 200, type: String }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], OrderDetailsController.prototype, "remove", null);
 exports.OrderDetailsController = OrderDetailsController = __decorate([
+    (0, swagger_1.ApiTags)('order-details'),
     (0, common_1.Controller)('order-details'),
     __metadata("design:paramtypes", [order_details_service_1.OrderDetailsService])
 ], OrderDetailsController);

@@ -10,31 +10,66 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateProductDto = void 0;
+const openapi = require("@nestjs/swagger");
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateProductDto {
+    static _OPENAPI_METADATA_FACTORY() {
+        return { name: { required: true, type: () => String }, description: { required: true, type: () => String }, price: { required: true, type: () => Number }, stock: { required: true, type: () => Number }, product: { required: true, type: () => String }, imgUrl: { required: true, type: () => String } };
+    }
 }
 exports.CreateProductDto = CreateProductDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Name of the product',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "name", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Description of the product',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "description", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Price of the product',
+        required: true
+    }),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "price", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Stock of the product',
+        required: true
+    }),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
 ], CreateProductDto.prototype, "stock", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Type product of the products',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "product", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'ImgUrl of the product',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProductDto.prototype, "imgUrl", void 0);

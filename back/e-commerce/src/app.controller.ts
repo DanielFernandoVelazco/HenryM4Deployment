@@ -1,9 +1,13 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
-@Controller()
+@ApiBearerAuth()
+@ApiTags('principal')
+@Controller('principal')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @Get()
   getHello(): string {

@@ -9,6 +9,7 @@ const products_seed_1 = require("./seeds/products/products.seed");
 const validation_pipe_1 = require("./pipes-validation/validation.pipe");
 const express_openid_connect_1 = require("express-openid-connect");
 const auth0_config_1 = require("./config/auth0.config");
+const swagger_1 = require("@nestjs/swagger");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.useGlobalPipes(new validation_pipe_1.ValidationPipe());
@@ -16,6 +17,14 @@ async function bootstrap() {
     app.use((0, express_openid_connect_1.auth)({
         ...auth0_config_1.auth0Config
     }));
+    const swaggerConfig = new swagger_1.DocumentBuilder()
+        .setTitle('Nest Henry PT20a')
+        .setDescription('API en nest')
+        .setVersion('1.0.0')
+        .addBearerAuth()
+        .build();
+    const document = swagger_1.SwaggerModule.createDocument(app, swaggerConfig);
+    swagger_1.SwaggerModule.setup('api', app, document);
     const categoriesSeed = app.get(categories_seed_1.CategoriesSeed);
     await categoriesSeed.seed();
     console.log('La inserción de categorias fue exitosa');

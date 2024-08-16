@@ -10,15 +10,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateOrderDto = void 0;
+const openapi = require("@nestjs/swagger");
+const swagger_1 = require("@nestjs/swagger");
 const class_validator_1 = require("class-validator");
 class CreateOrderDto {
+    static _OPENAPI_METADATA_FACTORY() {
+        return { userId: { required: true, type: () => String }, products: { required: true, type: () => [Object] } };
+    }
 }
 exports.CreateOrderDto = CreateOrderDto;
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'UserId of the order',
+        required: true
+    }),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateOrderDto.prototype, "userId", void 0);
 __decorate([
+    (0, swagger_1.ApiProperty)({
+        type: String,
+        description: 'Products of the order',
+        required: true
+    }),
     (0, class_validator_1.IsArray)(),
     __metadata("design:type", Array)
 ], CreateOrderDto.prototype, "products", void 0);

@@ -7,7 +7,10 @@ import { IsUUID } from 'class-validator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageUploadPipe } from 'src/pipes-validation/image/image-upload/image-upload.pipe';
 import { AuthGuard } from 'src/guard/auth/auth.guard';
+import { ApiTags } from '@nestjs/swagger';
 
+//@ApiBearerAuth()
+@ApiTags('products')
 @Controller('products')
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) { }
