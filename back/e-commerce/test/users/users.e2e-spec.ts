@@ -9,9 +9,6 @@ import { UsersService } from "src/users/users.service";
 import * as request from "supertest";
 import { UserResponseDto } from "src/users/dto/response-user.dto";
 
-
-
-/* eslint-disable prettier/prettier */
 describe('User (e2e)', () => {
     let app: INestApplication;
     let authToken: string;
@@ -48,7 +45,6 @@ describe('User (e2e)', () => {
                     phone: '1234567890',
                     country: 'Some Country',
                     city: 'Some City',
-                    user: 'Some User'
                 }
             ] as UserResponseDto[]);
         });

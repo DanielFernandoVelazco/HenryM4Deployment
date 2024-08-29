@@ -45,7 +45,7 @@ describe('AuthController', () => {
         },
         {
           provide: JwtService,
-          useValue: { singAsinc: () => Promise.resolve('mockJwtToken') },
+          useValue: { signAsync: () => Promise.resolve('mockJwtToken') },
         },
         {
           provide: UsersService,

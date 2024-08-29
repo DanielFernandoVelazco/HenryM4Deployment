@@ -20,9 +20,9 @@ describe('AppController (e2e)', () => {
     await app.close();
   });
 
-  it('/ (GET)', () => {
+  it('/principal (GET)', () => {  // Cambiado a '/principal'
     return request(app.getHttpServer())
-      .get('/')
+      .get('/principal')
       .expect(200)
       .expect('Hello World!');
   });
