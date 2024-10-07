@@ -14,6 +14,7 @@ let ProductsRepository = class ProductsRepository {
             {
                 id: 1,
                 name: 'Product1',
+                description: 'Description1',
                 price: 100,
                 stock: true,
                 imlUrl: 'https://placeimg.com/640/480/any',
@@ -21,6 +22,7 @@ let ProductsRepository = class ProductsRepository {
             {
                 id: 2,
                 name: 'Product2',
+                description: 'Description2',
                 price: 200,
                 stock: false,
                 imlUrl: 'https://placeimg.com/640/480/any',
@@ -28,6 +30,7 @@ let ProductsRepository = class ProductsRepository {
             {
                 id: 3,
                 name: 'Product3',
+                description: 'Description3',
                 price: 300,
                 stock: true,
                 imlUrl: 'https://placeimg.com/640/480/any',
@@ -35,6 +38,7 @@ let ProductsRepository = class ProductsRepository {
             {
                 id: 4,
                 name: 'Product4',
+                description: 'Description4',
                 price: 400,
                 stock: true,
                 imlUrl: 'https://placeimg.com/640/480/any',
@@ -42,6 +46,7 @@ let ProductsRepository = class ProductsRepository {
             {
                 id: 5,
                 name: 'Product5',
+                description: 'Description5',
                 price: 500,
                 stock: false,
                 imlUrl: 'https://placeimg.com/640/480/any',

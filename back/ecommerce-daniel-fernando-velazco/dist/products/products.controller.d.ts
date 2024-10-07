@@ -8,6 +8,7 @@ export declare class ProductsController {
     findAll(): {
         id: number;
         name: string;
+        description: string;
         price: number;
         stock: boolean;
         imlUrl: string;

@@ -1,8 +1,20 @@
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UsersRepository } from './users.repository';
 export declare class UsersService {
+    private readonly userRepository;
+    constructor(userRepository: UsersRepository);
     create(createUserDto: CreateUserDto): string;
-    findAll(): string;
+    findAll(): {
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    }[];
     findOne(id: number): string;
     update(id: number, updateUserDto: UpdateUserDto): string;
     remove(id: number): string;

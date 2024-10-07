@@ -3,6 +3,7 @@ export declare class ProductsRepository {
     findAll(): {
         id: number;
         name: string;
+        description: string;
         price: number;
         stock: boolean;
         imlUrl: string;
