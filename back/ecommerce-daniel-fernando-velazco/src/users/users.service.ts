@@ -13,6 +13,7 @@ export class UsersService {
 
   findAll() {
     return this.userRepository.findAll();
+
   }
 
   findOne(id: number) {
