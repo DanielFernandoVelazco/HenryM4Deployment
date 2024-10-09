@@ -13,7 +13,14 @@ export declare class ProductsController {
         stock: boolean;
         imlUrl: string;
     }[];
-    findOne(id: string): string;
+    findOne(id: string): {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imlUrl: string;
+    };
     update(id: string, updateProductDto: UpdateProductDto): string;
     remove(id: string): string;
 }

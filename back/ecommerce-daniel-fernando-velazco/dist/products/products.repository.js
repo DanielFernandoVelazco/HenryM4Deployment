@@ -56,6 +56,9 @@ let ProductsRepository = class ProductsRepository {
     findAll() {
         return this.products;
     }
+    findOne(id) {
+        return this.products.find((product) => product.id === id);
+    }
 };
 exports.ProductsRepository = ProductsRepository;
 exports.ProductsRepository = ProductsRepository = __decorate([

@@ -56,6 +56,9 @@ let UsersRepository = class UsersRepository {
     findAll() {
         return this.users;
     }
+    findOne(id) {
+        return this.users.find((user) => user.id === id);
+    }
 };
 exports.UsersRepository = UsersRepository;
 exports.UsersRepository = UsersRepository = __decorate([

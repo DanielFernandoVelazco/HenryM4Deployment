@@ -23,7 +23,7 @@ let ProductsService = class ProductsService {
         return this.productRepository.findAll();
     }
     findOne(id) {
-        return `This action returns a #${id} product`;
+        return this.productRepository.findOne(id);
     }
     update(id, updateProductDto) {
         return `This action updates a #${id} product`;

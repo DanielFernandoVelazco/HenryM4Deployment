@@ -15,7 +15,16 @@ export declare class UsersController {
         country: string;
         city: string;
     }[];
-    findOne(id: string): string;
+    findOne(id: string): {
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    };
     update(id: string, updateUserDto: UpdateUserDto): string;
     remove(id: string): string;
 }

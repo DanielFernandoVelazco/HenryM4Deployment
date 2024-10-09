@@ -8,4 +8,12 @@ export declare class ProductsRepository {
         stock: boolean;
         imlUrl: string;
     }[];
+    findOne(id: number): {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imlUrl: string;
+    };
 }

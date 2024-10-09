@@ -13,7 +13,14 @@ export declare class ProductsService {
         stock: boolean;
         imlUrl: string;
     }[];
-    findOne(id: number): string;
+    findOne(id: number): {
+        id: number;
+        name: string;
+        description: string;
+        price: number;
+        stock: boolean;
+        imlUrl: string;
+    };
     update(id: number, updateProductDto: UpdateProductDto): string;
     remove(id: number): string;
 }

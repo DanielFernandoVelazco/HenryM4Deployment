@@ -49,4 +49,8 @@ export class UsersRepository {
     findAll() {
         return this.users;
     }
+
+    findOne(id: number){
+        return this.users.find((user) => user.id === id)
+    }
 }

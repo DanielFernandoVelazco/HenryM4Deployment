@@ -15,7 +15,16 @@ export declare class UsersService {
         country: string;
         city: string;
     }[];
-    findOne(id: number): string;
+    findOne(id: number): {
+        id: number;
+        email: string;
+        name: string;
+        password: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    };
     update(id: number, updateUserDto: UpdateUserDto): string;
     remove(id: number): string;
 }

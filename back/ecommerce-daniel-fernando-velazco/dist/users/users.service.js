@@ -23,7 +23,7 @@ let UsersService = class UsersService {
         return this.userRepository.findAll();
     }
     findOne(id) {
-        return `This action returns a #${id} user`;
+        return this.userRepository.findOne(id);
     }
     update(id, updateUserDto) {
         return `This action updates a #${id} user`;
