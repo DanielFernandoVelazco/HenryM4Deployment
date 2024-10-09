@@ -1,10 +1,18 @@
 export declare class UsersRepository {
     private users;
+    arrayUsers: {
+        id: number;
+        email: string;
+        name: string;
+        address: string;
+        phone: string;
+        country: string;
+        city: string;
+    }[];
     findAll(): {
         id: number;
         email: string;
         name: string;
-        password: string;
         address: string;
         phone: string;
         country: string;
@@ -14,7 +22,6 @@ export declare class UsersRepository {
         id: number;
         email: string;
         name: string;
-        password: string;
         address: string;
         phone: string;
         country: string;

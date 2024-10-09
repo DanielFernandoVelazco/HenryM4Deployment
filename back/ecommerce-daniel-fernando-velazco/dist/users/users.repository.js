@@ -52,12 +52,13 @@ let UsersRepository = class UsersRepository {
                 city: 'city4',
             }
         ];
+        this.arrayUsers = this.users.map(({ password, ...user }) => user);
     }
     findAll() {
-        return this.users;
+        return this.arrayUsers;
     }
     findOne(id) {
-        return this.users.find((user) => user.id === id);
+        return this.arrayUsers.find((user) => user.id === id);
     }
 };
 exports.UsersRepository = UsersRepository;

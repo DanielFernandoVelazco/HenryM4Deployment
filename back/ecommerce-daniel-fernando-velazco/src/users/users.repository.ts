@@ -46,11 +46,15 @@ export class UsersRepository {
         }
     ]
 
+    arrayUsers = this.users.map(({password, ...user}) => user);
+
     findAll() {
-        return this.users;
+        return this.arrayUsers;
     }
 
     findOne(id: number){
-        return this.users.find((user) => user.id === id)
+        return this.arrayUsers.find((user) => user.id === id)
     }
+
+
 }
