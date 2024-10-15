@@ -17,7 +17,7 @@ let UsersService = class UsersService {
         this.userRepository = userRepository;
     }
     create(createUserDto) {
-        return 'This action adds a new user';
+        return this.userRepository.create(createUserDto);
     }
     findAll() {
         return this.userRepository.findAll();
@@ -25,10 +25,12 @@ let UsersService = class UsersService {
     findOne(id) {
         return this.userRepository.findOne(id);
     }
-    update(id, updateUserDto) {
+    update(id, updateUser) {
+        this.userRepository.update(id, updateUser);
         return `This action updates a #${id} user`;
     }
     remove(id) {
+        this.userRepository.remove(id);
         return `This action removes a #${id} user`;
     }
 };

@@ -4,16 +4,7 @@ import { ProductsRepository } from './products.repository';
 export declare class ProductsService {
     private readonly productRepository;
     constructor(productRepository: ProductsRepository);
-    create(createProductDto: CreateProductDto): string;
-    findAll(): {
-        id: number;
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imlUrl: string;
-    }[];
-    findOne(id: number): {
+    create(createProduct: CreateProductDto): {
         id: number;
         name: string;
         description: string;
@@ -21,6 +12,8 @@ export declare class ProductsService {
         stock: boolean;
         imlUrl: string;
     };
-    update(id: number, updateProductDto: UpdateProductDto): string;
+    findAll(): CreateProductDto[];
+    findOne(id: number): CreateProductDto;
+    update(id: number, updateProduct: UpdateProductDto): string;
     remove(id: number): string;
 }

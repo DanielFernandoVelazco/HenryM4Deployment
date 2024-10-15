@@ -4,16 +4,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export declare class ProductsController {
     private readonly productsService;
     constructor(productsService: ProductsService);
-    create(createProductDto: CreateProductDto): string;
-    findAll(): {
-        id: number;
-        name: string;
-        description: string;
-        price: number;
-        stock: boolean;
-        imlUrl: string;
-    }[];
-    findOne(id: string): {
+    create(createProduct: CreateProductDto): {
         id: number;
         name: string;
         description: string;
@@ -21,6 +12,8 @@ export declare class ProductsController {
         stock: boolean;
         imlUrl: string;
     };
+    findAll(): CreateProductDto[];
+    findOne(id: string): CreateProductDto;
     update(id: string, updateProductDto: UpdateProductDto): string;
     remove(id: string): string;
 }

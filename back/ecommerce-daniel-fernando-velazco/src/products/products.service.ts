@@ -7,8 +7,8 @@ import { ProductsRepository } from './products.repository';
 export class ProductsService {
   constructor(private readonly productRepository: ProductsRepository) { }
 
-  create(createProductDto: CreateProductDto) {
-    return 'This action adds a new product';
+  create(createProduct: CreateProductDto) {
+    return this.productRepository.create(createProduct);
   }
 
   findAll() {
@@ -20,11 +20,13 @@ export class ProductsService {
     return this.productRepository.findOne(id);
   }
 
-  update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+  update(id: number, updateProduct: UpdateProductDto) {
+    this.productRepository.update(id, updateProduct);
+    return `This action updates a #${+id} product`;
   }
 
   remove(id: number) {
-    return `This action removes a #${id} product`;
+    this.productRepository.remove(id);
+    return `This action removes a #${+id} product`;
   }
 }

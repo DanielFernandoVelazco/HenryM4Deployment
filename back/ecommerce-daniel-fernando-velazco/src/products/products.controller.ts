@@ -10,8 +10,8 @@ export class ProductsController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  create(@Body() createProductDto: CreateProductDto) {
-    return this.productsService.create(createProductDto);
+  create(@Body() createProduct: CreateProductDto) {
+    return this.productsService.create(createProduct);
   }
 
   @Get()
@@ -33,7 +33,6 @@ export class ProductsController {
     return this.productsService.update(+id, updateProductDto);
   }
 
-  
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   remove(@Param('id') id: string) {

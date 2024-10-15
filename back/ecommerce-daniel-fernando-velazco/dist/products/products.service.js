@@ -16,8 +16,8 @@ let ProductsService = class ProductsService {
     constructor(productRepository) {
         this.productRepository = productRepository;
     }
-    create(createProductDto) {
-        return 'This action adds a new product';
+    create(createProduct) {
+        return this.productRepository.create(createProduct);
     }
     findAll() {
         return this.productRepository.findAll();
@@ -25,11 +25,13 @@ let ProductsService = class ProductsService {
     findOne(id) {
         return this.productRepository.findOne(id);
     }
-    update(id, updateProductDto) {
-        return `This action updates a #${id} product`;
+    update(id, updateProduct) {
+        this.productRepository.update(id, updateProduct);
+        return `This action updates a #${+id} product`;
     }
     remove(id) {
-        return `This action removes a #${id} product`;
+        this.productRepository.remove(id);
+        return `This action removes a #${+id} product`;
     }
 };
 exports.ProductsService = ProductsService;

@@ -53,11 +53,27 @@ let ProductsRepository = class ProductsRepository {
             }
         ];
     }
+    create(createProduct) {
+        const id = this.products.length + 1;
+        const productAdd = { id, ...createProduct };
+        this.products = [...this.products, productAdd];
+        return productAdd;
+    }
     findAll() {
         return this.products;
     }
     findOne(id) {
         return this.products.find((product) => product.id === id);
+    }
+    update(id, updateProduct) {
+        const product = this.findOne(id);
+        const upProduct = { ...product, ...updateProduct };
+        this.products = this.products.map((product) => (product.id === id ? upProduct : product));
+        return upProduct;
+    }
+    remove(id) {
+        this.products = this.products.filter((product) => product.id !== id);
+        return id;
     }
 };
 exports.ProductsRepository = ProductsRepository;

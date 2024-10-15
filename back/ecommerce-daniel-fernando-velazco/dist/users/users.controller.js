@@ -30,8 +30,8 @@ let UsersController = class UsersController {
     findOne(id) {
         return this.usersService.findOne(+id);
     }
-    update(id, updateUserDto) {
-        return this.usersService.update(+id, updateUserDto);
+    update(id, updateUser) {
+        return this.usersService.update(+id, updateUser);
     }
     remove(id) {
         return this.usersService.remove(+id);

@@ -21,8 +21,8 @@ let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
     }
-    create(createProductDto) {
-        return this.productsService.create(createProductDto);
+    create(createProduct) {
+        return this.productsService.create(createProduct);
     }
     findAll() {
         return this.productsService.findAll();

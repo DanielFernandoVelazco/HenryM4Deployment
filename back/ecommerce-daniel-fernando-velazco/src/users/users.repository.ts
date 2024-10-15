@@ -1,8 +1,10 @@
 import { Injectable } from "@nestjs/common";
+import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 @Injectable()
 export class UsersRepository {
-    private users = [
+    private users: CreateUserDto[] = [
 
         {
             id: 1,
@@ -46,15 +48,32 @@ export class UsersRepository {
         }
     ]
 
-    arrayUsers = this.users.map(({password, ...user}) => user);
+    arrayUsers = this.users.map(({ password, ...user }) => user);
+
+    create(createUser: CreateUserDto) {
+        const id = this.arrayUsers.length + 1;
+        const userAdd = { id, ...createUser };
+        this.arrayUsers = [...this.arrayUsers, userAdd];
+        return userAdd;
+    }
 
     findAll() {
         return this.arrayUsers;
     }
 
-    findOne(id: number){
+    findOne(id: number) {
         return this.arrayUsers.find((user) => user.id === id)
     }
 
+    update(id: number, updateUser: UpdateUserDto) {
+        const user = this.findOne(id);
+        const upUser = { ...user, ...updateUser };
+        this.arrayUsers = this.arrayUsers.map((user) => (user.id === id ? upUser : user));
+        return upUser;
+    }
 
+    remove(id: number) {
+        this.arrayUsers = this.arrayUsers.filter((user) => user.id !== id);
+        return id;
+    }
 }

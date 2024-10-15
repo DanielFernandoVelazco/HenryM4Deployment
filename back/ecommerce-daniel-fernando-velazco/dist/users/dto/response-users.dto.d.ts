@@ -1,4 +1,4 @@
-export declare class CreateUserDto {
+export declare class UserResponseDto {
     id: number;
     email: string;
     name: string;
@@ -7,4 +7,5 @@ export declare class CreateUserDto {
     phone: string;
     country?: string;
     city?: string;
+    constructor(partial: Partial<UserResponseDto>);
 }

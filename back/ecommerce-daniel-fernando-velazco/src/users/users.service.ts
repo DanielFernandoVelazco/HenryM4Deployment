@@ -8,7 +8,7 @@ export class UsersService {
   constructor(private readonly userRepository: UsersRepository) { }
 
   create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+    return this.userRepository.create(createUserDto);
   }
 
   findAll() {
@@ -20,11 +20,13 @@ export class UsersService {
     return this.userRepository.findOne(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
+  update(id: number, updateUser: UpdateUserDto) {
+    this.userRepository.update(id, updateUser);
     return `This action updates a #${id} user`;
   }
 
   remove(id: number) {
+    this.userRepository.remove(id);
     return `This action removes a #${id} user`;
   }
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
+import { CreateProductDto } from './dto/create-product.dto';
 
 @Injectable()
 export class ProductsRepository {
-    private products = [
+    private products: CreateProductDto[] = [
         {
             id: 1,
             name: 'Product1',
@@ -45,11 +46,30 @@ export class ProductsRepository {
         }
     ]
 
+    create(createProduct: CreateProductDto) {
+        const id = this.products.length + 1;
+        const productAdd = { id, ...createProduct };
+        this.products = [...this.products, productAdd];
+        return productAdd;
+    }
+
     findAll() {
         return this.products;
     }
 
-    findOne(id: number){
+    findOne(id: number) {
         return this.products.find((product) => product.id === id)
+    }
+
+    update(id: number, updateProduct: CreateProductDto) {
+        const product = this.findOne(id);
+        const upProduct = { ...product, ...updateProduct };
+        this.products = this.products.map((product) => (product.id === id ? upProduct : product));
+        return upProduct;
+    }
+
+    remove(id: number) {
+        this.products = this.products.filter((product) => product.id !== id);
+        return id;
     }
 }

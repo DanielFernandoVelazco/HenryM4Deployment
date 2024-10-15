@@ -54,11 +54,27 @@ let UsersRepository = class UsersRepository {
         ];
         this.arrayUsers = this.users.map(({ password, ...user }) => user);
     }
+    create(createUser) {
+        const id = this.arrayUsers.length + 1;
+        const userAdd = { id, ...createUser };
+        this.arrayUsers = [...this.arrayUsers, userAdd];
+        return userAdd;
+    }
     findAll() {
         return this.arrayUsers;
     }
     findOne(id) {
         return this.arrayUsers.find((user) => user.id === id);
+    }
+    update(id, updateUser) {
+        const user = this.findOne(id);
+        const upUser = { ...user, ...updateUser };
+        this.arrayUsers = this.arrayUsers.map((user) => (user.id === id ? upUser : user));
+        return upUser;
+    }
+    remove(id) {
+        this.arrayUsers = this.arrayUsers.filter((user) => user.id !== id);
+        return id;
     }
 };
 exports.UsersRepository = UsersRepository;
