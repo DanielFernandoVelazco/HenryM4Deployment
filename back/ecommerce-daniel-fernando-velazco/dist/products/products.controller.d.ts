@@ -12,7 +12,7 @@ export declare class ProductsController {
         stock: boolean;
         imlUrl: string;
     };
-    findAll(): CreateProductDto[];
+    findAll(page?: number, limit?: number): CreateProductDto[];
     findOne(id: string): CreateProductDto;
     update(id: string, updateProductDto: UpdateProductDto): string;
     remove(id: string): string;

@@ -61,7 +61,7 @@ let UsersRepository = class UsersRepository {
         return userAdd;
     }
     findAll({ page, limit }) {
-        return this.arrayUsers.slice(page, page + limit);
+        return this.arrayUsers.slice(page, limit);
     }
     findOne(id) {
         return this.arrayUsers.find((user) => user.id === id);
@@ -75,6 +75,9 @@ let UsersRepository = class UsersRepository {
     remove(id) {
         this.arrayUsers = this.arrayUsers.filter((user) => user.id !== id);
         return id;
+    }
+    findOneByEmail(email) {
+        return this.users.find((user) => user.email === email);
     }
 };
 exports.UsersRepository = UsersRepository;

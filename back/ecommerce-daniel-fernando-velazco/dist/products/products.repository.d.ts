@@ -9,7 +9,10 @@ export declare class ProductsRepository {
         stock: boolean;
         imlUrl: string;
     };
-    findAll(): CreateProductDto[];
+    findAll({ page, limit }: {
+        page: number;
+        limit: number;
+    }): CreateProductDto[];
     findOne(id: number): CreateProductDto;
     update(id: number, updateProduct: CreateProductDto): {
         id: number;

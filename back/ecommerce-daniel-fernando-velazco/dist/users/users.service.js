@@ -20,7 +20,6 @@ let UsersService = class UsersService {
         return this.userRepository.create(createUserDto);
     }
     findAll({ page, limit }) {
-        page = page - 1;
         return this.userRepository.findAll({ page, limit });
     }
     findOne(id) {
@@ -33,6 +32,9 @@ let UsersService = class UsersService {
     remove(id) {
         this.userRepository.remove(id);
         return `This action removes a #${id} user`;
+    }
+    findOneByEmail(email) {
+        return this.userRepository.findOneByEmail(email);
     }
 };
 exports.UsersService = UsersService;

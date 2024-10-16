@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthGuard } from 'src/guard/auth/auth.guard';
 
 @Controller('users')
 export class UsersController {
@@ -21,11 +22,13 @@ export class UsersController {
     @Query('limit') limit: number = 5
   ) {
     console.log(`Can find the following user rank: ${page} - ${limit}`);
+    page = page - 1;
     return this.usersService.findAll({ page, limit });
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
+  @UseGuards(AuthGuard)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne(+id);
   }

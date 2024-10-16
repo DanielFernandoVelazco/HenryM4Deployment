@@ -58,7 +58,7 @@ export class UsersRepository {
     }
 
     findAll({ page, limit }: { page: number; limit: number }) {
-        return this.arrayUsers.slice(page, page + limit);
+        return this.arrayUsers.slice(page, limit);
     }
 
     findOne(id: number) {
@@ -75,5 +75,9 @@ export class UsersRepository {
     remove(id: number) {
         this.arrayUsers = this.arrayUsers.filter((user) => user.id !== id);
         return id;
+    }
+
+    findOneByEmail(email: string) {
+        return this.users.find((user) => user.email === email);
     }
 }

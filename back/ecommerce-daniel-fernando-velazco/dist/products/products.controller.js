@@ -24,8 +24,10 @@ let ProductsController = class ProductsController {
     create(createProduct) {
         return this.productsService.create(createProduct);
     }
-    findAll() {
-        return this.productsService.findAll();
+    findAll(page = 1, limit = 5) {
+        console.log(`Can find the following products rank: ${page} - ${limit}`);
+        page = page - 1;
+        return this.productsService.findAll({ page, limit });
     }
     findOne(id) {
         return this.productsService.findOne(+id);
@@ -49,8 +51,10 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
+    __param(0, (0, common_1.Query)('page')),
+    __param(1, (0, common_1.Query)('limit')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", void 0)
 ], ProductsController.prototype, "findAll", null);
 __decorate([

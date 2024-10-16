@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -16,8 +16,13 @@ export class ProductsController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  findAll() {
-    return this.productsService.findAll();
+  findAll(
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 5
+  ) {
+    console.log(`Can find the following products rank: ${page} - ${limit}`);
+    page = page - 1;
+    return this.productsService.findAll({ page, limit });
   }
 
   @Get(':id')

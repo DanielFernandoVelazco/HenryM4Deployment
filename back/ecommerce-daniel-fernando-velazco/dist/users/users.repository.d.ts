@@ -53,4 +53,5 @@ export declare class UsersRepository {
         city?: string;
     };
     remove(id: number): number;
+    findOneByEmail(email: string): CreateUserDto;
 }

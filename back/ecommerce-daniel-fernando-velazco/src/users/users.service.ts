@@ -12,7 +12,6 @@ export class UsersService {
   }
 
   findAll({ page, limit }: { page: number; limit: number }) {
-    page = page - 1;
     return this.userRepository.findAll({ page, limit });
   }
 
@@ -28,5 +27,9 @@ export class UsersService {
   remove(id: number) {
     this.userRepository.remove(id);
     return `This action removes a #${id} user`;
+  }
+
+  findOneByEmail(email: string) {
+    return this.userRepository.findOneByEmail(email)
   }
 }

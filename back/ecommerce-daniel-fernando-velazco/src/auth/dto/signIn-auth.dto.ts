@@ -1,4 +1,5 @@
-export declare class CreateAuthDto {
+export interface SignInAuthDto {
+
     email: string;
     password: string;
 }

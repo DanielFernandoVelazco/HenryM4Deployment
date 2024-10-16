@@ -53,8 +53,8 @@ export class ProductsRepository {
         return productAdd;
     }
 
-    findAll() {
-        return this.products;
+    findAll({ page, limit }: { page: number; limit: number; }) {
+        return this.products.slice(page, limit);
     }
 
     findOne(id: number) {

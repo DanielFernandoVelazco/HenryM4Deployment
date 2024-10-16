@@ -59,8 +59,8 @@ let ProductsRepository = class ProductsRepository {
         this.products = [...this.products, productAdd];
         return productAdd;
     }
-    findAll() {
-        return this.products;
+    findAll({ page, limit }) {
+        return this.products.slice(page, limit);
     }
     findOne(id) {
         return this.products.find((product) => product.id === id);

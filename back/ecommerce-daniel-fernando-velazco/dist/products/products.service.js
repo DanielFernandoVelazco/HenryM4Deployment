@@ -19,8 +19,8 @@ let ProductsService = class ProductsService {
     create(createProduct) {
         return this.productRepository.create(createProduct);
     }
-    findAll() {
-        return this.productRepository.findAll();
+    findAll({ page, limit }) {
+        return this.productRepository.findAll({ page, limit });
     }
     findOne(id) {
         return this.productRepository.findOne(id);

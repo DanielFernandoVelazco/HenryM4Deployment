@@ -11,8 +11,8 @@ export class ProductsService {
     return this.productRepository.create(createProduct);
   }
 
-  findAll() {
-    return this.productRepository.findAll();
+  findAll({ page, limit }: { page: number; limit: number; }) {
+    return this.productRepository.findAll({ page, limit });
 
   }
 

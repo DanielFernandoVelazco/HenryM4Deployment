@@ -37,4 +37,5 @@ export declare class UsersService {
     };
     update(id: number, updateUser: UpdateUserDto): string;
     remove(id: number): string;
+    findOneByEmail(email: string): CreateUserDto;
 }
