@@ -19,8 +19,9 @@ let UsersService = class UsersService {
     create(createUserDto) {
         return this.userRepository.create(createUserDto);
     }
-    findAll() {
-        return this.userRepository.findAll();
+    findAll({ page, limit }) {
+        page = page - 1;
+        return this.userRepository.findAll({ page, limit });
     }
     findOne(id) {
         return this.userRepository.findOne(id);

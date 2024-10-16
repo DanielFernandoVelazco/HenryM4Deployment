@@ -14,7 +14,7 @@ export declare class UsersController {
         country?: string;
         city?: string;
     };
-    findAll(): {
+    findAll(page?: number, limit?: number): {
         id: number;
         email: string;
         name: string;

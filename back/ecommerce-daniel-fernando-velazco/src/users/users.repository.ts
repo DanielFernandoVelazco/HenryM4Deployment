@@ -57,8 +57,8 @@ export class UsersRepository {
         return userAdd;
     }
 
-    findAll() {
-        return this.arrayUsers;
+    findAll({ page, limit }: { page: number; limit: number }) {
+        return this.arrayUsers.slice(page, page + limit);
     }
 
     findOne(id: number) {

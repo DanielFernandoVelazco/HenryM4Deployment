@@ -14,7 +14,10 @@ export declare class UsersService {
         country?: string;
         city?: string;
     };
-    findAll(): {
+    findAll({ page, limit }: {
+        page: number;
+        limit: number;
+    }): {
         id: number;
         email: string;
         name: string;

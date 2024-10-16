@@ -11,9 +11,9 @@ export class UsersService {
     return this.userRepository.create(createUserDto);
   }
 
-  findAll() {
-    return this.userRepository.findAll();
-
+  findAll({ page, limit }: { page: number; limit: number }) {
+    page = page - 1;
+    return this.userRepository.findAll({ page, limit });
   }
 
   findOne(id: number) {

@@ -60,8 +60,8 @@ let UsersRepository = class UsersRepository {
         this.arrayUsers = [...this.arrayUsers, userAdd];
         return userAdd;
     }
-    findAll() {
-        return this.arrayUsers;
+    findAll({ page, limit }) {
+        return this.arrayUsers.slice(page, page + limit);
     }
     findOne(id) {
         return this.arrayUsers.find((user) => user.id === id);
