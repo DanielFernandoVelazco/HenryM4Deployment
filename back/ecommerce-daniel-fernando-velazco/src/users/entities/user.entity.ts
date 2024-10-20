@@ -31,7 +31,7 @@ export class User {
     coutry: string;
 
     @Column({ length: 50, nullable: true })
-    city: string;
+    cityDay: string;
 
     @OneToMany(() => Order, order => order.user)
     orders: Order[];

@@ -6,7 +6,7 @@ dotenv.config({
     path: '.env.development.local',
 });
 
-const postgresDataSource: DataSourceOptions = {
+const PostgresDataSourceOptions: DataSourceOptions = {
 
     type: 'postgres',
     host: process.env.POSTGRES_HOST,
@@ -14,10 +14,11 @@ const postgresDataSource: DataSourceOptions = {
     username: process.env.POSTGRES_USER,
     password: process.env.POSTGRES_PASSWORD,
     database: process.env.POSTGRES_DATABASE,
-    synchronize: true,
+    synchronize: false,
     logging: true,
     entities: ['dist/**/*.entity{.ts,.js}'],
     migrations: ['dist/migrations/*{.ts,.js}'],
 };
 
-export const postgresDataSourceConfig = registerAs('postgres', () => postgresDataSource)
+export const postgresDataSourceConfig = registerAs('postgres', () => PostgresDataSourceOptions);
+export const PostgresDataSource = new DataSource(PostgresDataSourceOptions)

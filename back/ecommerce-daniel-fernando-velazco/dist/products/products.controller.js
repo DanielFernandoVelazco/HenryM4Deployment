@@ -24,7 +24,7 @@ let ProductsController = class ProductsController {
     create(createProductDto) {
         return this.productsService.create(createProductDto);
     }
-    findAll(page = 1, limit = 10) {
+    findAll(page = 1, limit = 5) {
         return this.productsService.findAll(page, limit);
     }
     findOne(id) {

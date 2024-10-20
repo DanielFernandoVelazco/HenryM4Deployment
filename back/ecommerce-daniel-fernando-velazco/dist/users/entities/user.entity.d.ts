@@ -11,6 +11,6 @@ export declare class User {
     address: string;
     phone: number;
     coutry: string;
-    city: string;
+    cityDay: string;
     orders: Order[];
 }

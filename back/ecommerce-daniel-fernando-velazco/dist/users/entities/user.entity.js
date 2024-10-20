@@ -55,7 +55,7 @@ __decorate([
 __decorate([
     (0, typeorm_1.Column)({ length: 50, nullable: true }),
     __metadata("design:type", String)
-], User.prototype, "city", void 0);
+], User.prototype, "cityDay", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => order_entity_1.Order, order => order.user),
     __metadata("design:type", Array)

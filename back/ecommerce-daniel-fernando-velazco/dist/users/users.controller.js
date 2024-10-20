@@ -26,7 +26,7 @@ let UsersController = class UsersController {
     create(createUserDto) {
         return this.usersService.create(createUserDto);
     }
-    findAll(page = 1, limit = 10) {
+    findAll(page = 1, limit = 5) {
         return this.usersService.findAll();
     }
     async findOne(id) {
