@@ -15,8 +15,8 @@ class CreateUserDto {
 }
 exports.CreateUserDto = CreateUserDto;
 __decorate([
-    (0, class_validator_1.IsNumber)(),
-    __metadata("design:type", Number)
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
 ], CreateUserDto.prototype, "id", void 0);
 __decorate([
     (0, class_validator_1.IsEmail)(),
@@ -38,7 +38,7 @@ __decorate([
 ], CreateUserDto.prototype, "address", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], CreateUserDto.prototype, "phone", void 0);
 __decorate([
     (0, class_validator_1.IsString)(),

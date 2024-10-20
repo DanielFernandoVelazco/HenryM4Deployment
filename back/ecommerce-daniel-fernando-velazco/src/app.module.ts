@@ -10,6 +10,7 @@ import { CategoriesModule } from './categories/categories.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { postgresDataSourceConfig } from './config/data-source';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SeedModule } from './seeds/seeds.module';
 
 @Module({
   imports: [
@@ -26,7 +27,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     AuthModule,
     OrdersModule,
     OrderDetailsModule,
-    CategoriesModule],
+    CategoriesModule,
+    SeedModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

@@ -1,13 +1,13 @@
-import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query, Put, UseGuards } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserResponseDto } from './dto/response-users.dto';
 import { AuthGuard } from 'src/guard/auth/auth.guard';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
-
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -19,31 +19,29 @@ export class UsersController {
   @HttpCode(HttpStatus.OK)
   findAll(
     @Query('page') page: number = 1,
-    @Query('limit') limit: number = 5
+    @Query('limit') limit: number = 10,
   ) {
-    console.log(`Can find the following user rank: ${page} - ${limit}`);
-    page = page - 1;
-    return this.usersService.findAll({ page, limit });
+    return this.usersService.findAll();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   @UseGuards(AuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.usersService.findOne(+id);
-  }
 
+  async findOne(@Param('id') id: string) {
+    const user = await this.usersService.findOne(id);
+    return new UserResponseDto(user)
+  }
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
-  update(@Param('id') id: string, @Body() updateUser: UpdateUserDto) {
-    return this.usersService.update(+id, updateUser);
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(id, updateUserDto);
   }
-
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
   remove(@Param('id') id: string) {
-    return this.usersService.remove(+id);
+    return this.usersService.remove(id);
   }
 }

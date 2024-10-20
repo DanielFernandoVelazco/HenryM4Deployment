@@ -13,12 +13,35 @@ const app_service_1 = require("./app.service");
 const products_module_1 = require("./products/products.module");
 const users_module_1 = require("./users/users.module");
 const auth_module_1 = require("./auth/auth.module");
+const orders_module_1 = require("./orders/orders.module");
+const order_details_module_1 = require("./order-details/order-details.module");
+const categories_module_1 = require("./categories/categories.module");
+const config_1 = require("@nestjs/config");
+const data_source_1 = require("./config/data-source");
+const typeorm_1 = require("@nestjs/typeorm");
+const seeds_module_1 = require("./seeds/seeds.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [products_module_1.ProductsModule, users_module_1.UsersModule, auth_module_1.AuthModule],
+        imports: [
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                load: [data_source_1.postgresDataSourceConfig]
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync({
+                inject: [config_1.ConfigService],
+                useFactory: (ConfigService) => ConfigService.get('postgres'),
+            }),
+            products_module_1.ProductsModule,
+            users_module_1.UsersModule,
+            auth_module_1.AuthModule,
+            orders_module_1.OrdersModule,
+            order_details_module_1.OrderDetailsModule,
+            categories_module_1.CategoriesModule,
+            seeds_module_1.SeedModule,
+        ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

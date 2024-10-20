@@ -1,35 +1,63 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { UsersRepository } from './users.repository';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { User } from './entities/user.entity';
+import { UserResponseDto } from './dto/response-users.dto';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepository: UsersRepository) { }
 
-  create(createUserDto: CreateUserDto) {
-    return this.userRepository.create(createUserDto);
+  constructor(
+    @InjectRepository(User) private readonly usersRepository: Repository<User>,
+  ) { }
+
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const newUser = this.usersRepository.create(createUserDto)
+    return this.usersRepository.save(newUser)
   }
 
-  findAll({ page, limit }: { page: number; limit: number }) {
-    return this.userRepository.findAll({ page, limit });
+  async findAll(): Promise<UserResponseDto[]> {
+    const users = this.usersRepository.find();
+    return (await users).map(
+      (user: User) => new UserResponseDto(user as Partial<UserResponseDto>)
+    )
   }
 
-  findOne(id: number) {
-    return this.userRepository.findOne(id);
+  async findOne(id: string): Promise<UserResponseDto | null> {
+    const user = await this.usersRepository.findOneBy({ id })
+    if (!user) {
+      return null
+    }
+    return new UserResponseDto(user as Partial<UserResponseDto>)
   }
 
-  update(id: number, updateUser: UpdateUserDto) {
-    this.userRepository.update(id, updateUser);
-    return `This action updates a #${id} user`;
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+  ): Promise<UserResponseDto> {
+    await this.usersRepository.update(id, updateUserDto)
+    const user = await this.usersRepository.findOneBy({ id })
+    return new UserResponseDto(user as Partial<UserResponseDto>)
   }
 
-  remove(id: number) {
-    this.userRepository.remove(id);
-    return `This action removes a #${id} user`;
+  async remove(id: string) {
+    return this.usersRepository.delete(id);
   }
 
-  findOneByEmail(email: string) {
-    return this.userRepository.findOneByEmail(email)
+  async findByEmail(email: string) {
+    return this.usersRepository.findOne({ where: { email: email } })
+  }
+
+  async findOneBy(id: string) {
+    return this.usersRepository.findOneBy({ id })
+  }
+
+  pag(page, limit) {
+    return {
+      page,
+      limit
+    }
   }
 }

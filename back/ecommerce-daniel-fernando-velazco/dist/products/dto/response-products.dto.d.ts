@@ -1,9 +1,9 @@
-export declare class ProductsResponseDto {
-    id: number;
+export declare class ProductResponseDto {
+    id: string;
     name: string;
     description: string;
     price: number;
-    stock: boolean;
-    imlUrl: string;
-    constructor(partial: Partial<ProductsResponseDto>);
+    stock: number;
+    imgUrl: string;
+    constructor(partial: Partial<ProductResponseDto>);
 }

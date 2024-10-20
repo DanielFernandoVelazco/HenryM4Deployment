@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductsResponseDto = void 0;
-class ProductsResponseDto {
+exports.ProductResponseDto = void 0;
+class ProductResponseDto {
     constructor(partial) {
-        const { id, name, description, price, stock, imlUrl } = partial;
+        const { id, name, description, price, stock, imgUrl } = partial;
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
-        this.imlUrl = imlUrl;
+        this.imgUrl = imgUrl;
     }
 }
-exports.ProductsResponseDto = ProductsResponseDto;
+exports.ProductResponseDto = ProductResponseDto;
 //# sourceMappingURL=response-products.dto.js.map

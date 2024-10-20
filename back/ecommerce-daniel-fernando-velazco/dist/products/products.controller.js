@@ -21,22 +21,20 @@ let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
     }
-    create(createProduct) {
-        return this.productsService.create(createProduct);
+    create(createProductDto) {
+        return this.productsService.create(createProductDto);
     }
-    findAll(page = 1, limit = 5) {
-        console.log(`Can find the following products rank: ${page} - ${limit}`);
-        page = page - 1;
-        return this.productsService.findAll({ page, limit });
+    findAll(page = 1, limit = 10) {
+        return this.productsService.findAll(page, limit);
     }
     findOne(id) {
-        return this.productsService.findOne(+id);
+        return this.productsService.findOne(id);
     }
     update(id, updateProductDto) {
-        return this.productsService.update(+id, updateProductDto);
+        return this.productsService.update(id, updateProductDto);
     }
     remove(id) {
-        return this.productsService.remove(+id);
+        return this.productsService.remove(id);
     }
 };
 exports.ProductsController = ProductsController;

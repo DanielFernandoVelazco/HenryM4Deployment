@@ -1,21 +1,18 @@
-export class ProductsResponseDto {
+export class ProductResponseDto {
+    id: string
+    name: string
+    description: string
+    price: number
+    stock: number
+    imgUrl: string
 
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    stock: boolean;
-    imlUrl: string;
-
-    constructor(partial: Partial<ProductsResponseDto>) {
-        
-        const {id, name, description, price, stock, imlUrl} = partial;
-
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.stock = stock;
-        this.imlUrl = imlUrl;
+    constructor(partial: Partial<ProductResponseDto>) {
+        const { id, name, description, price, stock, imgUrl } = partial
+        this.id = id
+        this.name = name
+        this.description = description
+        this.price = price
+        this.stock = stock
+        this.imgUrl = imgUrl
     }
 }

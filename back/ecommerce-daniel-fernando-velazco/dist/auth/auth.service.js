@@ -13,29 +13,29 @@ exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
 let AuthService = class AuthService {
-    constructor(usersService) {
-        this.usersService = usersService;
+    constructor(userService) {
+        this.userService = userService;
     }
-    signIn(credentials) {
-        const user = this.usersService.findOneByEmail(credentials.email);
+    async signIn(credentials) {
+        const user = await this.userService.findByEmail(credentials.email);
         if (user && user.password === credentials.password) {
             return "You are logged in";
         }
         return "Wrong credentials";
     }
-    create(createAuthDto) {
+    async create(createAuthDto) {
         return 'This action adds a new auth';
     }
-    findAll() {
+    async findAll() {
         return `This action returns all auths`;
     }
-    findOne(id) {
+    async findOne(id) {
         return `This action returns a #${id} auth`;
     }
-    update(id, updateAuthDto) {
+    async update(id, updateAuthDto) {
         return `This action updates a #${id} auth`;
     }
-    remove(id) {
+    async remove(id) {
         return `This action removes a #${id} auth`;
     }
 };

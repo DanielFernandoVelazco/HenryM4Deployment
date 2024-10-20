@@ -1,8 +1,8 @@
 export declare class CreateProductDto {
-    id: number;
+    id: string;
     name: string;
     description: string;
     price: number;
-    stock: boolean;
-    imlUrl: string;
+    stock: number;
+    imgUrl: string;
 }

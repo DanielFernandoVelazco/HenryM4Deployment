@@ -1,32 +1,41 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { Order } from 'src/orders/entities/order.entity';
+import { Order } from "src/orders/entities/order.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { v4 as uuid } from 'uuid';
+
+export enum Role {
+    User = 'user',
+    Admin = 'admin',
+}
 
 @Entity()
 export class User {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id: string = uuid();
 
-    @Column({ length: 50 })
+    @Column({ length: 50, nullable: false })
     name: string;
 
-    @Column({ length: 50, unique: true })
-    email: string;
-
-    @Column({ length: 20 })
+    @Column({ length: 20, nullable: false })
     password: string;
 
-    @Column({ type: 'int', nullable: true })
+    @Column({ length: 50, nullable: false })
+    email: string;
+
+    @Column('text', { nullable: false })
+    address: string;
+
+    @Column('int', { nullable: false })
     phone: number;
 
     @Column({ length: 50, nullable: true })
-    country: string;
-
-    @Column({ type: 'text', nullable: true })
-    address: string;
+    coutry: string;
 
     @Column({ length: 50, nullable: true })
     city: string;
 
-    @OneToMany(() => Order, (order) => order.user)
+    @OneToMany(() => Order, order => order.user)
     orders: Order[];
+
+    //@Column({ default: Role.User })
+    //administrator: string;
 }

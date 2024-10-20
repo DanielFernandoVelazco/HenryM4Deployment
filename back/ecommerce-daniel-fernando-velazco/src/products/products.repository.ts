@@ -1,3 +1,4 @@
+/*
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 
@@ -73,3 +74,4 @@ export class ProductsRepository {
         return id;
     }
 }
+*/
