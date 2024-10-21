@@ -3,5 +3,5 @@ export interface ProductId {
 }
 export declare class CreateOrderDto {
     userId: string;
-    products: Array<ProductId>;
+    products: ProductId[];
 }

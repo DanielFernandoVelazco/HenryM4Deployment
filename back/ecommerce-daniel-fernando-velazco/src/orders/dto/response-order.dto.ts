@@ -3,7 +3,6 @@ import { OrdersDetail } from 'src/order-details/entities/order-detail.entity';
 export class OrderResponseDto {
 
     id: string
-
     price: number
 
     products: object[]
