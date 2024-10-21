@@ -17,6 +17,7 @@ const common_1 = require("@nestjs/common");
 const products_service_1 = require("./products.service");
 const create_product_dto_1 = require("./dto/create-product.dto");
 const update_product_dto_1 = require("./dto/update-product.dto");
+const class_validator_1 = require("class-validator");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -27,8 +28,15 @@ let ProductsController = class ProductsController {
     findAll(page = 1, limit = 5) {
         return this.productsService.findAll(page, limit);
     }
-    findOne(id) {
-        return this.productsService.findOne(id);
+    async asyncfindOne(id) {
+        const product = await this.productsService.findOne(id);
+        if (!(0, class_validator_1.IsUUID)(4, { each: true })) {
+            throw new common_1.HttpException('Invalid UUID', common_1.HttpStatus.BAD_REQUEST);
+        }
+        if (!product) {
+            throw new common_1.HttpException('Product not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return product;
     }
     update(id, updateProductDto) {
         return this.productsService.update(id, updateProductDto);
@@ -58,11 +66,11 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':id'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
-    __param(0, (0, common_1.Param)('id')),
+    __param(0, (0, common_1.Param)('id', new common_1.ParseUUIDPipe())),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], ProductsController.prototype, "findOne", null);
+    __metadata("design:returntype", Promise)
+], ProductsController.prototype, "asyncfindOne", null);
 __decorate([
     (0, common_1.Put)(':id'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),

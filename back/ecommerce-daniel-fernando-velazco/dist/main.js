@@ -5,8 +5,10 @@ const app_module_1 = require("./app.module");
 const logger_middleware_1 = require("./middleware/logger/logger.middleware");
 const categories_seeds_1 = require("./seeds/categories/categories.seeds");
 const products_seeds_1 = require("./seeds/products/products.seeds");
+const common_1 = require("@nestjs/common");
 async function bootstrap() {
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
+    app.useGlobalPipes(new common_1.ValidationPipe());
     app.use(logger_middleware_1.globalLogger);
     const categoriesSeed = app.get(categories_seeds_1.CategoriesSeed);
     await categoriesSeed.seed();

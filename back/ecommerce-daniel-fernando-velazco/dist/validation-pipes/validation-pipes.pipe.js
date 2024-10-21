@@ -8,9 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ValidationPipesPipe = void 0;
 const common_1 = require("@nestjs/common");
+const class_validator_1 = require("class-validator");
+const class_transformer_1 = require("class-transformer");
 let ValidationPipesPipe = class ValidationPipesPipe {
-    transform(value, metadata) {
+    async transform(value, { metatype }) {
+        if (!metatype || !this.toValidate(metatype))
+            return value;
+        const object = (0, class_transformer_1.plainToInstance)(metatype, value);
+        const errors = await (0, class_validator_1.validate)(object);
+        if (errors.length > 0) {
+            throw new common_1.BadRequestException('Validation failed');
+        }
         return value;
+    }
+    toValidate(metatype) {
+        const types = [String, Boolean, Number, Array, Object];
+        return !types.includes(metatype);
     }
 };
 exports.ValidationPipesPipe = ValidationPipesPipe;
