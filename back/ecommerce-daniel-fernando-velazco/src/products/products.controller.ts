@@ -1,8 +1,10 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query, Put, HttpException, ParseUUIDPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query, Put, HttpException, ParseUUIDPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { IsUUID } from 'class-validator';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ImageUploadPipe } from 'src/pipes/image/image-upload/image-upload.pipe';
 
 @Controller('products')
 export class ProductsController {
@@ -46,5 +48,16 @@ export class ProductsController {
   @HttpCode(HttpStatus.OK)
   remove(@Param('id') id: string) {
     return this.productsService.remove(id);
+  }
+
+  @Post(':id/upload')
+  @HttpCode(HttpStatus.OK)
+  @UseInterceptors(FileInterceptor('file'))
+
+  async uploadFile(
+    @Param('id') id: string,
+    @UploadedFile(new ImageUploadPipe()) file: Express.Multer.File,
+  ) {
+    return await this.productsService.uploadFile(file, id);
   }
 }

@@ -20,6 +20,8 @@ const config_1 = require("@nestjs/config");
 const data_source_1 = require("./config/data-source");
 const typeorm_1 = require("@nestjs/typeorm");
 const seeds_module_1 = require("./seeds/seeds.module");
+const cloudinary_service_1 = require("./service/cloudinary/cloudinary.service");
+const file_upload_module_1 = require("./file-upload/file-upload.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -41,9 +43,10 @@ exports.AppModule = AppModule = __decorate([
             order_details_module_1.OrderDetailsModule,
             categories_module_1.CategoriesModule,
             seeds_module_1.SeedModule,
+            file_upload_module_1.FileUploadModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, cloudinary_service_1.CloudinaryService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

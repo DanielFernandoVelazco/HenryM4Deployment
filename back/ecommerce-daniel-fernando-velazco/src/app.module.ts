@@ -11,6 +11,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { postgresDataSourceConfig } from './config/data-source';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SeedModule } from './seeds/seeds.module';
+import { CloudinaryService } from './service/cloudinary/cloudinary.service';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 @Module({
   imports: [
@@ -29,8 +31,9 @@ import { SeedModule } from './seeds/seeds.module';
     OrderDetailsModule,
     CategoriesModule,
     SeedModule,
+    FileUploadModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, CloudinaryService],
 })
 export class AppModule { }

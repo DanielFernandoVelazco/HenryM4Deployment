@@ -2,9 +2,12 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { Repository } from 'typeorm';
+import { uploadFileDto } from 'src/file-upload/dto/update-file.dto';
+import { FileUploadService } from 'src/file-upload/file-upload.service';
 export declare class ProductsService {
     private readonly productsRepository;
-    constructor(productsRepository: Repository<Product>);
+    private readonly fileUploadService;
+    constructor(productsRepository: Repository<Product>, fileUploadService: FileUploadService);
     create(createProductDto: CreateProductDto): Promise<Product>;
     findAll(page: number, limit: number): Promise<Product[]>;
     findOne(id: string): Promise<Product>;
@@ -13,4 +16,7 @@ export declare class ProductsService {
         id: string;
     }>;
     buyProduct(id: string): Promise<Product>;
+    uploadFile(file: uploadFileDto, id: string): Promise<{
+        imgUrl: string;
+    }>;
 }

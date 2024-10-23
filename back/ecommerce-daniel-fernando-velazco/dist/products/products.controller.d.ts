@@ -11,4 +11,7 @@ export declare class ProductsController {
     remove(id: string): Promise<{
         id: string;
     }>;
+    uploadFile(id: string, file: Express.Multer.File): Promise<{
+        imgUrl: string;
+    }>;
 }
