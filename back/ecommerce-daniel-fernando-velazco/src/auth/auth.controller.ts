@@ -27,6 +27,13 @@ export class AuthController {
     return this.authService.findAll();
   }
 
+  @Get('auth0/protected')
+  getAuth0Protected(@Req() request) {
+    console.log(JSON.stringify(request.oidc));
+    console.log(JSON.stringify(request.oidc.idToken));
+    return JSON.stringify(request.oidc.user)
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.authService.findOne(+id);
