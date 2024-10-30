@@ -11,6 +11,7 @@ export declare class AuthController {
     }>;
     signUp(signUpUser: SignUpAuthDto, request: any): Promise<UserResponseDto>;
     findAll(): Promise<string>;
+    getAuth0Protected(request: any): string;
     findOne(id: string): Promise<string>;
     update(id: string, updateAuthDto: UpdateAuthDto): Promise<string>;
     remove(id: string): Promise<string>;

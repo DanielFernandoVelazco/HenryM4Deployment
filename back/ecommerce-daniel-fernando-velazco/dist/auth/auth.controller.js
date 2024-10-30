@@ -33,6 +33,11 @@ let AuthController = class AuthController {
     findAll() {
         return this.authService.findAll();
     }
+    getAuth0Protected(request) {
+        console.log(JSON.stringify(request.oidc));
+        console.log(JSON.stringify(request.oidc.idToken));
+        return JSON.stringify(request.oidc.user);
+    }
     findOne(id) {
         return this.authService.findOne(+id);
     }
@@ -65,6 +70,13 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "findAll", null);
+__decorate([
+    (0, common_1.Get)('auth0/protected'),
+    __param(0, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "getAuth0Protected", null);
 __decorate([
     (0, common_1.Get)(':id'),
     __param(0, (0, common_1.Param)('id')),
