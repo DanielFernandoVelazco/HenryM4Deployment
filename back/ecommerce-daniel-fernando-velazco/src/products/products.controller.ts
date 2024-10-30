@@ -1,10 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, HttpCode, HttpStatus, Query, Put, HttpException, ParseUUIDPipe, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Query, Put, HttpException, ParseUUIDPipe, UseInterceptors, UploadedFile, UseGuards } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { IsUUID } from 'class-validator';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageUploadPipe } from 'src/pipes/image/image-upload/image-upload.pipe';
+import { AuthGuard } from 'src/guard/auth/auth.guard';
 
 @Controller('products')
 export class ProductsController {
@@ -53,6 +54,7 @@ export class ProductsController {
   @Post(':id/upload')
   @HttpCode(HttpStatus.OK)
   @UseInterceptors(FileInterceptor('file'))
+  @UseGuards(AuthGuard)
 
   async uploadFile(
     @Param('id') id: string,

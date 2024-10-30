@@ -1,20 +1,48 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable } from '@nestjs/common';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { SignInAuthDto } from './dto/signIn-auth.dto';
 import { UsersService } from 'src/users/users.service';
+import { JwtService } from '@nestjs/jwt';
+import { hash } from 'bcrypt';
+import { User } from 'src/users/entities/user.entity';
+import { SignUpAuthDto } from './dto/signup-auth.dto';
+
 
 @Injectable()
 export class AuthService {
 
-  constructor(private readonly userService: UsersService) { }
+  constructor(
+    private readonly userService: UsersService,
+    private readonly jwtService: JwtService,
+  ) { }
 
-  async signIn(credentials: SignInAuthDto) {
-    const user = await this.userService.findByEmail(credentials.email);
-    if (user && user.password === credentials.password) {
-      return "You are logged in"
+  async signIn(signInUser: SignInAuthDto) {
+    const user = await this.userService.findByEmail(signInUser.email);
+    if (!user) throw new HttpException('User not found', 404);
+
+    const passwordUser = await user.password;
+    const passwordSignIn = await signInUser.password
+    const isPasswordMatch = passwordUser === passwordSignIn;
+    if (!isPasswordMatch) throw new HttpException('Wrong credentials', 400);
+
+    const token = await this.createToken(user);
+    return { token };
+  }
+
+  private async createToken(user: User) {
+    const payload = {
+      id: user.id,
+      email: user.email,
     }
-    return "Wrong credentials"
+    return this.jwtService.signAsync(payload);
+  }
+
+  async signUp(signUpUser: SignUpAuthDto) {
+    if (signUpUser.password !== signUpUser.passwordConfirm) throw new HttpException('Passwords do not match', 400);
+
+    signUpUser.password = await hash(signUpUser.password, 10);
+    return this.userService.create(signUpUser);
   }
 
   async create(createAuthDto: CreateAuthDto) {

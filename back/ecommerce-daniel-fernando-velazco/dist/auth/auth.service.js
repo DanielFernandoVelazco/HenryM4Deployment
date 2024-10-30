@@ -12,16 +12,37 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
 const users_service_1 = require("../users/users.service");
+const jwt_1 = require("@nestjs/jwt");
+const bcrypt_1 = require("bcrypt");
 let AuthService = class AuthService {
-    constructor(userService) {
+    constructor(userService, jwtService) {
         this.userService = userService;
+        this.jwtService = jwtService;
     }
-    async signIn(credentials) {
-        const user = await this.userService.findByEmail(credentials.email);
-        if (user && user.password === credentials.password) {
-            return "You are logged in";
-        }
-        return "Wrong credentials";
+    async signIn(signInUser) {
+        const user = await this.userService.findByEmail(signInUser.email);
+        if (!user)
+            throw new common_1.HttpException('User not found', 404);
+        const passwordUser = await user.password;
+        const passwordSignIn = await signInUser.password;
+        const isPasswordMatch = passwordUser === passwordSignIn;
+        if (!isPasswordMatch)
+            throw new common_1.HttpException('Wrong credentials', 400);
+        const token = await this.createToken(user);
+        return { token };
+    }
+    async createToken(user) {
+        const payload = {
+            id: user.id,
+            email: user.email,
+        };
+        return this.jwtService.signAsync(payload);
+    }
+    async signUp(signUpUser) {
+        if (signUpUser.password !== signUpUser.passwordConfirm)
+            throw new common_1.HttpException('Passwords do not match', 400);
+        signUpUser.password = await (0, bcrypt_1.hash)(signUpUser.password, 10);
+        return this.userService.create(signUpUser);
     }
     async create(createAuthDto) {
         return 'This action adds a new auth';
@@ -42,6 +63,7 @@ let AuthService = class AuthService {
 exports.AuthService = AuthService;
 exports.AuthService = AuthService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [users_service_1.UsersService])
+    __metadata("design:paramtypes", [users_service_1.UsersService,
+        jwt_1.JwtService])
 ], AuthService);
 //# sourceMappingURL=auth.service.js.map

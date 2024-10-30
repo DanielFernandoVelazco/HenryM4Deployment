@@ -1,7 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Req, } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { SignInAuthDto } from './dto/signIn-auth.dto';
+import { SignUpAuthDto } from './dto/signup-auth.dto';
+import { UserResponseDto } from 'src/users/dto/response-users.dto';
 
 @Controller('auth')
 export class AuthController {
@@ -10,8 +12,14 @@ export class AuthController {
   ) { }
 
   @Post('signin')
-  signin(@Body() credentials: SignInAuthDto) {
+  async signin(@Body() credentials: SignInAuthDto) {
     return this.authService.signIn(credentials);
+  }
+
+  @Post('singup')
+  async signUp(@Body() signUpUser: SignUpAuthDto, @Req() request) {
+    const user = await this.authService.signUp(signUpUser);
+    return new UserResponseDto(user);
   }
 
   @Get()

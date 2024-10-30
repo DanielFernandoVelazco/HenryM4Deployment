@@ -16,7 +16,7 @@ let ImageUploadPipe = class ImageUploadPipe {
             'image/jpg',
             'image/gif',
         ];
-        this.maxSizeInBytes = 10485760;
+        this.maxSizeInBytes = 1600000;
     }
     transform(file) {
         if (!file)

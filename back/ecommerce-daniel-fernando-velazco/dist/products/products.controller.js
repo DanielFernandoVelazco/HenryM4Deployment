@@ -20,6 +20,7 @@ const update_product_dto_1 = require("./dto/update-product.dto");
 const class_validator_1 = require("class-validator");
 const platform_express_1 = require("@nestjs/platform-express");
 const image_upload_pipe_1 = require("../pipes/image/image-upload/image-upload.pipe");
+const auth_guard_1 = require("../guard/auth/auth.guard");
 let ProductsController = class ProductsController {
     constructor(productsService) {
         this.productsService = productsService;
@@ -97,6 +98,7 @@ __decorate([
     (0, common_1.Post)(':id/upload'),
     (0, common_1.HttpCode)(common_1.HttpStatus.OK),
     (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('file')),
+    (0, common_1.UseGuards)(auth_guard_1.AuthGuard),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.UploadedFile)(new image_upload_pipe_1.ImageUploadPipe())),
     __metadata("design:type", Function),

@@ -17,12 +17,18 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const update_auth_dto_1 = require("./dto/update-auth.dto");
 const signIn_auth_dto_1 = require("./dto/signIn-auth.dto");
+const signup_auth_dto_1 = require("./dto/signup-auth.dto");
+const response_users_dto_1 = require("../users/dto/response-users.dto");
 let AuthController = class AuthController {
     constructor(authService) {
         this.authService = authService;
     }
-    signin(credentials) {
+    async signin(credentials) {
         return this.authService.signIn(credentials);
+    }
+    async signUp(signUpUser, request) {
+        const user = await this.authService.signUp(signUpUser);
+        return new response_users_dto_1.UserResponseDto(user);
     }
     findAll() {
         return this.authService.findAll();
@@ -43,8 +49,16 @@ __decorate([
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [signIn_auth_dto_1.SignInAuthDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:returntype", Promise)
 ], AuthController.prototype, "signin", null);
+__decorate([
+    (0, common_1.Post)('singup'),
+    __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.Req)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [signup_auth_dto_1.SignUpAuthDto, Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "signUp", null);
 __decorate([
     (0, common_1.Get)(),
     __metadata("design:type", Function),

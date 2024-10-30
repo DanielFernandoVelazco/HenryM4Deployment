@@ -13,6 +13,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { SeedModule } from './seeds/seeds.module';
 import { CloudinaryService } from './service/cloudinary/cloudinary.service';
 import { FileUploadModule } from './file-upload/file-upload.module';
+import { SharedModule } from './shared/shared.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { FileUploadModule } from './file-upload/file-upload.module';
     CategoriesModule,
     SeedModule,
     FileUploadModule,
+    SharedModule,
   ],
   controllers: [AppController],
   providers: [AppService, CloudinaryService],

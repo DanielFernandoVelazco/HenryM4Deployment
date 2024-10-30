@@ -15,12 +15,6 @@ class CreateUserDto {
 }
 exports.CreateUserDto = CreateUserDto;
 __decorate([
-    (0, class_validator_1.IsString)(),
-    (0, class_validator_1.IsUUID)('4', { message: 'The userId must be a valid UUID.' }),
-    (0, class_validator_1.IsNotEmpty)({ message: 'The userId is required.' }),
-    __metadata("design:type", String)
-], CreateUserDto.prototype, "id", void 0);
-__decorate([
     (0, class_validator_1.IsEmail)({}, { message: 'The email must be in a valid format.' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Email is required.' }),
     (0, class_validator_1.IsEmail)(),
