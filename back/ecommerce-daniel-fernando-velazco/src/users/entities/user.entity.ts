@@ -36,6 +36,6 @@ export class User {
     @OneToMany(() => Order, order => order.user)
     orders: Order[];
 
-    //@Column({ default: Role.User })
-    //administrator: string;
+    @Column({ default: Role.User })
+    administrator: string;
 }

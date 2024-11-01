@@ -4,14 +4,21 @@ import { FileUploadService } from './file-upload.service';
 
 describe('FileUploadController', () => {
   let controller: FileUploadController;
+  let service: FileUploadService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [FileUploadController],
-      providers: [FileUploadService],
+      providers: [
+        {
+          provide: FileUploadService,
+          useValue: {},
+        },
+      ],
     }).compile();
 
     controller = module.get<FileUploadController>(FileUploadController);
+    service = module.get<FileUploadService>(FileUploadService);
   });
 
   it('should be defined', () => {

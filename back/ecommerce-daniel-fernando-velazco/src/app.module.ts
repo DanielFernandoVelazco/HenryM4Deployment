@@ -14,16 +14,25 @@ import { SeedModule } from './seeds/seeds.module';
 import { CloudinaryService } from './service/cloudinary/cloudinary.service';
 import { FileUploadModule } from './file-upload/file-upload.module';
 import { SharedModule } from './shared/shared.module';
+import { sqliteDataSourceConfig } from 'test/typeorm-testing-config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      envFilePath: ['.env.development.local', '.env'],
       isGlobal: true,
-      load: [postgresDataSourceConfig]
+      load: [postgresDataSourceConfig, sqliteDataSourceConfig,
+        () => ({
+          enviroment: process.env.enviroment || 'TEST'
+        })
+      ],
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (ConfigService: ConfigService) => ConfigService.get('postgres'),
+      useFactory: (ConfigService: ConfigService) =>
+        ConfigService.get('enviroment') === 'TEST'
+          ? ConfigService.get('sqlite')
+          : ConfigService.get('postgres'),
     }),
     ProductsModule,
     UsersModule,

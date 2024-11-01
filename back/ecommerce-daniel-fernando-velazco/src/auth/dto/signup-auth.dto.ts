@@ -51,4 +51,8 @@ export class SignUpAuthDto {
     @MinLength(5, { message: 'The city must be at least 5 characters.' })
     @MaxLength(20, { message: 'The city must not exceed 20 characters.' })
     city?: string
+
+    constructor(partial: Partial<SignUpAuthDto>) {
+        Object.assign(this, partial)
+    }
 }

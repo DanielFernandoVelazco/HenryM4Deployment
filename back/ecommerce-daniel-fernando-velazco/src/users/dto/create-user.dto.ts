@@ -2,9 +2,6 @@ import { IsEmail, IsNotEmpty, IsNumber, IsOptional, IsString, IsUUID, Matches, M
 
 export class CreateUserDto {
 
-    //@IsString()
-    //@IsUUID('4', { message: 'The userId must be a valid UUID.' })
-    //@IsNotEmpty({ message: 'The userId is required.' })
     id: string;
 
     @IsEmail({}, { message: 'The email must be in a valid format.' })
