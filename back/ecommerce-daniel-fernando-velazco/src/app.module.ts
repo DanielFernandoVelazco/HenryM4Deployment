@@ -29,10 +29,7 @@ import { sqliteDataSourceConfig } from 'test/typeorm-testing-config';
     }),
     TypeOrmModule.forRootAsync({
       inject: [ConfigService],
-      useFactory: (ConfigService: ConfigService) =>
-        ConfigService.get('enviroment') === 'TEST'
-          ? ConfigService.get('sqlite')
-          : ConfigService.get('postgres'),
+      useFactory: (ConfigService: ConfigService) => ConfigService.get('postgres'),
     }),
     ProductsModule,
     UsersModule,
