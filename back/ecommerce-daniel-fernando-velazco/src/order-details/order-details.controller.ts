@@ -2,7 +2,9 @@ import { Controller, Get, Post, Body, Param, Delete, HttpCode, HttpStatus, Put }
 import { OrderDetailsService } from './order-details.service';
 import { CreateOrderDetailDto } from './dto/create-order-detail.dto';
 import { UpdateOrderDetailDto } from './dto/update-order-detail.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Order Details-Swagger')
 @Controller('order-details')
 export class OrderDetailsController {
   constructor(private readonly orderDetailsService: OrderDetailsService) { }

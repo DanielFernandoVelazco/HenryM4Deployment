@@ -4,7 +4,10 @@ import { UpdateAuthDto } from './dto/update-auth.dto';
 import { SignInAuthDto } from './dto/signIn-auth.dto';
 import { SignUpAuthDto } from './dto/signup-auth.dto';
 import { UserResponseDto } from 'src/users/dto/response-users.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+
+@ApiTags('Auth-Swagger')
 @Controller('auth')
 export class AuthController {
   constructor(
